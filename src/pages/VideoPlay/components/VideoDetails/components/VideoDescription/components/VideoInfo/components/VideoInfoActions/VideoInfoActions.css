@@ -1,0 +1,23 @@
+.video-info-actions {
+  display: flex;
+  align-items: center;
+}
+
+.video-action-btn {
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size-5);
+  padding: 0 0.5rem;
+  white-space: nowrap;
+}
+
+.action-icon {
+  margin-right: 0.3rem;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 540px) {
+  .video-info-actions {
+    justify-content: center;
+  }
+}

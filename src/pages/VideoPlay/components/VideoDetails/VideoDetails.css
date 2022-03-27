@@ -1,0 +1,13 @@
+.single-video-details-container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 540px) {
+  .single-video-details-container {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,16 @@
+.channel-details-title {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-size: var(--font-size-5);
+  font-weight: var(--font-weight-3);
+  color: var(--primary-color);
+}
+
+.channel-subscribers {
+  font-size: var(--font-size-6);
+  margin-bottom: 0.5rem;
+}
+
+.single-video-description {
+  font-size: var(--font-size-7);
+}

@@ -1,0 +1,36 @@
+.playlist-title {
+  position: relative;
+  text-align: center;
+  font-size: var(--font-size-4);
+}
+
+.playlist-title::after {
+  content: "";
+  position: absolute;
+  background: var(--primary-color);
+  left: 50%;
+  bottom: -0.5rem;
+  height: 0.4rem;
+  border-radius: 0.25rem;
+  width: 8rem;
+  transform: translateX(-50%);
+}
+
+.btn-playlist {
+  margin: 1rem;
+  padding: 1rem;
+  width: 100%;
+  font-size: var(--font-size-4);
+}
+
+.plus-icon {
+  margin-right: 1rem;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 540px) {
+  .playlist-btn-container {
+    text-align: center;
+    margin: 1rem;
+  }
+}

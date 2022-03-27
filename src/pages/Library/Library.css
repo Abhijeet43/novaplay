@@ -1,0 +1,11 @@
+.library-section {
+  display: none;
+  width: 100%;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 540px) {
+  .library-section {
+    display: block;
+  }
+}

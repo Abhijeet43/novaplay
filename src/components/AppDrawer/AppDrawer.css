@@ -1,0 +1,33 @@
+.app-drawer {
+  position: sticky;
+  top: 0;
+  flex-basis: 20%;
+}
+
+.drawer-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 1rem;
+  font-size: var(--font-size-4);
+  color: var(--primary-color);
+  transition: all 0.2s ease-in-out;
+}
+
+.drawer-item:hover,
+.active {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+.drawer-item-icon {
+  margin-right: 1.5rem;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 540px) {
+  .app-drawer {
+    display: none;
+  }
+}
