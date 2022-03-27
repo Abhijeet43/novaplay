@@ -1,0 +1,36 @@
+.mobile-navigator {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: var(--font-size-4);
+  width: 100%;
+  z-index: 3;
+  background-color: var(--secondary-color);
+  box-shadow: 1.95px 0 2.6px rgb(0 0 0 / 15%);
+  display: none;
+}
+
+.mobile-nav-item {
+  padding: 0.5rem;
+}
+
+.mobile-icon {
+  text-align: center;
+}
+
+.mobile-nav-item {
+  color: var(--lynx-gray-color);
+}
+
+.mobile-nav-item:hover {
+  color: var(--primary-color);
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 540px) {
+  .mobile-navigator {
+    display: flex;
+  }
+}

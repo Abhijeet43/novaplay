@@ -1,0 +1,11 @@
+.categories-container {
+  width: 100%;
+  display: flex;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 540px) {
+  .categories-container {
+    overflow-x: scroll;
+  }
+}

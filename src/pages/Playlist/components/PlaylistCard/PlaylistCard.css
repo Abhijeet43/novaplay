@@ -1,0 +1,74 @@
+.playlist-card {
+  width: 30rem;
+  position: relative;
+  border-radius: 1rem;
+}
+
+.playlist-img {
+  border-radius: 1rem;
+}
+
+.playlist-card.create {
+  background-color: #a7a1a14d;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.blank-text {
+  font-size: var(--font-size-4);
+  color: var(--primary-color);
+  padding-top: 1rem;
+}
+
+.overlay-count {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 1rem;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--secondary-color);
+  font-size: var(--font-size-5);
+  width: 40%;
+  height: 98%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.category-title {
+  padding: 1rem;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  position: absolute;
+  width: 100%;
+  height: 99%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transform: scale(0);
+  z-index: 4;
+  transition: transform 0.2s ease-in;
+  color: var(--secondary-color);
+  font-size: var(--font-size-4);
+}
+
+.overlay-action-icon {
+  cursor: pointer;
+}
+
+.playlist-card:hover .overlay {
+  transform: scale(1);
+}

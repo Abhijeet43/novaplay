@@ -1,0 +1,14 @@
+.channel-info-container {
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 540px) {
+  .channel-info-container {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,8 @@
+.channel-img-container {
+  padding: 1rem;
+}
+
+.channel-img {
+  border-radius: 50%;
+  width: 10rem;
+}

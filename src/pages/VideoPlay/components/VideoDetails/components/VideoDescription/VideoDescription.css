@@ -1,0 +1,7 @@
+.single-video-description {
+  width: 100%;
+}
+
+.single-video-title {
+  font-size: var(--font-size-5);
+}

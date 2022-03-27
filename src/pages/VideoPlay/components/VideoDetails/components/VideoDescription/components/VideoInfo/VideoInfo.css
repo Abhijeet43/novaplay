@@ -1,0 +1,12 @@
+.video-info-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 540px) {
+  .video-info-container {
+    flex-direction: column;
+  }
+}

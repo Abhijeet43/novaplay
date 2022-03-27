@@ -1,0 +1,12 @@
+.video-embed {
+  height: 70vh;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 540px) {
+  .video-embed {
+    margin: 0 auto;
+    width: 38rem;
+    height: 30vh;
+  }
+}
