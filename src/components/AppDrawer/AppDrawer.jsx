@@ -1,10 +1,11 @@
 import React from "react";
 import "./AppDrawer.css";
+import { NavLink } from "react-router-dom";
 
 const AppDrawer = () => {
   return (
     <section className="app-drawer">
-      <a href="#" className="drawer-item active">
+      <NavLink to="/" className="drawer-item">
         <div className="drawer-item-icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -23,8 +24,8 @@ const AppDrawer = () => {
           </svg>
         </div>
         <div className="drawer-item-text">Home</div>
-      </a>
-      <a href="#" className="drawer-item">
+      </NavLink>
+      <NavLink to="/explore/:all" className="drawer-item">
         <div className="drawer-item-icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -43,8 +44,8 @@ const AppDrawer = () => {
           </svg>
         </div>
         <div>Explore</div>
-      </a>
-      <a href="#" className="drawer-item">
+      </NavLink>
+      <NavLink to="/playlist" className="drawer-item">
         <div className="drawer-item-icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -63,8 +64,8 @@ const AppDrawer = () => {
           </svg>
         </div>
         <div>Playlist</div>
-      </a>
-      <a href="#" className="drawer-item">
+      </NavLink>
+      <NavLink to="/watchlater" className="drawer-item">
         <div className="drawer-item-icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -83,8 +84,8 @@ const AppDrawer = () => {
           </svg>
         </div>
         <div>Watch Later</div>
-      </a>
-      <a href="#" className="drawer-item">
+      </NavLink>
+      <NavLink to="/liked" className="drawer-item">
         <div className="drawer-item-icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -103,8 +104,8 @@ const AppDrawer = () => {
           </svg>
         </div>
         <div>Liked</div>
-      </a>
-      <a href="#" className="drawer-item">
+      </NavLink>
+      <NavLink to="/history" className="drawer-item">
         <div className="drawer-item-icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +124,7 @@ const AppDrawer = () => {
           </svg>
         </div>
         <div>History</div>
-      </a>
+      </NavLink>
     </section>
   );
 };

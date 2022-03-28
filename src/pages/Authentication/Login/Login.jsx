@@ -1,5 +1,6 @@
 import React from "react";
 import "../authentication.css";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const guestUser = {
@@ -45,9 +46,9 @@ const Login = () => {
             </button>
             <p className="register-text">
               Don't have an account?
-              <a href="#" className="form-link">
+              <Link to="/signup" className="form-link">
                 Signup
-              </a>
+              </Link>
             </p>
           </div>
         </form>

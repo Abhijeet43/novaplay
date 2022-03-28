@@ -30,6 +30,7 @@
 .category-overlay-text {
   position: relative;
   cursor: pointer;
+  color: var(--secondary-color);
 }
 
 .category-overlay-text::before {

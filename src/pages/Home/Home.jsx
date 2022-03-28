@@ -1,6 +1,7 @@
 import React from "react";
 import "./Home.css";
 import { imageOne, learning, time, lifeSkills } from "../../assets/";
+import { Link } from "react-router-dom";
 import {
   CategoryCard,
   HorizontalCard,
@@ -17,9 +18,9 @@ const Home = () => {
       <section className="videos-section">
         <div className="section-header">
           <h2 className="section-title">Featured Categories</h2>
-          <a href="#" className="section-link">
+          <Link to="/explore" className="section-link">
             View All
-          </a>
+          </Link>
         </div>
 
         <div className="video-card-container">
@@ -30,9 +31,9 @@ const Home = () => {
 
         <div className="section-header">
           <h2 className="section-title">Trending Videos</h2>
-          <a href="#" className="section-link">
+          <Link to="/explore" className="section-link">
             View All
-          </a>
+          </Link>
         </div>
 
         <div className="video-card-container">
@@ -84,9 +85,9 @@ const Home = () => {
 
         <div className="section-header">
           <h2 className="section-title">Featured Videos</h2>
-          <a href="#" className="section-link">
+          <Link to="/explore" className="section-link">
             View All
-          </a>
+          </Link>
         </div>
 
         <div className="video-card-container">
