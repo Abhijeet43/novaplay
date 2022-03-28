@@ -1,14 +1,15 @@
 import React from "react";
 import "./Header.css";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <header>
       <nav className="navbar">
         <div className="nav-brand">
-          <a href="#" className="nav-title" to="/">
+          <Link className="nav-title" to="/">
             NOVAPLAY
-          </a>
+          </Link>
         </div>
         <div className="nav-search">
           <button className="search-icon">
@@ -22,7 +23,9 @@ const Header = () => {
         </div>
         <ul className="nav-items">
           <li className="nav-item">
-            <button className="btn btn-primary">Login</button>
+            <Link to="/login" className="btn btn-primary">
+              Login
+            </Link>
           </li>
         </ul>
       </nav>

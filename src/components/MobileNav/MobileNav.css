@@ -24,8 +24,10 @@
   color: var(--lynx-gray-color);
 }
 
-.mobile-nav-item:hover {
+.mobile-nav-item:hover,
+.mobile-navigator .active {
   color: var(--primary-color);
+  background: var(--secondary-color);
 }
 
 /* MEDIA QUERIES */

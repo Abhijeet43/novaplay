@@ -1,5 +1,6 @@
 import React from "react";
 import "./HorizontalCard.css";
+import { Link } from "react-router-dom";
 
 const HorizontalCard = ({
   image,
@@ -57,7 +58,7 @@ const HorizontalCard = ({
           </div>
         </div>
         <div className="video-actions">
-          <a href="#" className="video-actions-menu-icon">
+          <button className="video-actions-menu-icon">
             <svg
               id="Layer_1"
               data-name="Layer 1"
@@ -71,9 +72,9 @@ const HorizontalCard = ({
                 d="M15,0A15,15,0,1,1,0,15,15,15,0,0,1,15,0Zm0,92.93a15,15,0,1,1-15,15,15,15,0,0,1,15-15Zm0-46.47a15,15,0,1,1-15,15,15,15,0,0,1,15-15Z"
               />
             </svg>
-          </a>
+          </button>
           <div className="video-actions-menu">
-            <a href="#" className="video-actions-item">
+            <Link to="/playlist/:playlistId" className="video-actions-item">
               <div className="video-actions-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -92,8 +93,8 @@ const HorizontalCard = ({
                 </svg>
               </div>
               <div>Add To Playlist</div>
-            </a>
-            <a href="#" className="video-actions-item">
+            </Link>
+            <Link to="/watchlater/:watchlaterId" className="video-actions-item">
               <div className="video-actions-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +113,7 @@ const HorizontalCard = ({
                 </svg>
               </div>
               <div>Add To Watch Later</div>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

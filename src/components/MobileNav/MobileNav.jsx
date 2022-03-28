@@ -1,10 +1,11 @@
 import React from "react";
 import "./MobileNav.css";
+import { NavLink } from "react-router-dom";
 
 const MobileNav = () => {
   return (
     <section className="mobile-navigator">
-      <a href="#" className="mobile-nav-item">
+      <NavLink to="/" className="mobile-nav-item">
         <div className="mobile-icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -23,8 +24,8 @@ const MobileNav = () => {
           </svg>
         </div>
         <div className="drawer-item-text">Home</div>
-      </a>
-      <a href="#" className="mobile-nav-item">
+      </NavLink>
+      <NavLink to="/explore" className="mobile-nav-item">
         <div className="mobile-icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -43,8 +44,8 @@ const MobileNav = () => {
           </svg>
         </div>
         <div>Explore</div>
-      </a>
-      <a href="#" className="mobile-nav-item">
+      </NavLink>
+      <NavLink to="/library" className="mobile-nav-item">
         <div className="mobile-icon">
           <svg
             width="1em"
@@ -62,7 +63,7 @@ const MobileNav = () => {
           </svg>
         </div>
         <div>Library</div>
-      </a>
+      </NavLink>
     </section>
   );
 };

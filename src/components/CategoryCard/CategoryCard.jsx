@@ -1,5 +1,6 @@
 import React from "react";
 import "./CategoryCard.css";
+import { Link } from "react-router-dom";
 
 const CategoryCard = ({ image, title }) => {
   return (
@@ -8,7 +9,9 @@ const CategoryCard = ({ image, title }) => {
         <img className="category-img" src={image} alt="category-skills" />
       </div>
       <div className="category-overlay">
-        <p className="category-overlay-text">{title}</p>
+        <Link to="/explore/1" className="category-overlay-text">
+          {title}
+        </Link>
       </div>
     </div>
   );

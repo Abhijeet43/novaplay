@@ -1,5 +1,6 @@
 import React from "react";
 import "../authentication.css";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   return (
@@ -52,13 +53,13 @@ const Signup = () => {
           <div className="form-group">
             <span className="terms">
               By creating an account you agree to our
-              <a href="#" className="form-link">
+              <Link to="/privacy" className="form-link">
                 Privacy Policy
-              </a>
+              </Link>
               and
-              <a href="#" className="form-link">
+              <Link to="/terms" href="#" className="form-link">
                 Terms of Use
-              </a>
+              </Link>
             </span>
           </div>
           <div className="form-group">
@@ -67,9 +68,9 @@ const Signup = () => {
             </button>
             <p className="login-text">
               Already Have an Account?
-              <a href="#" className="form-link">
+              <Link to="/login" href="#" className="form-link">
                 Login
-              </a>
+              </Link>
             </p>
           </div>
         </form>

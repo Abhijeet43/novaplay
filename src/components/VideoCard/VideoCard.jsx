@@ -1,5 +1,6 @@
 import React from "react";
 import "./VideoCard.css";
+import { Link } from "react-router-dom";
 
 const VideoCard = ({ image, time, logo, title, subscribers, views, likes }) => {
   return (
@@ -44,7 +45,7 @@ const VideoCard = ({ image, time, logo, title, subscribers, views, likes }) => {
           </div>
 
           <div className="video-actions-menu">
-            <a href="#" className="video-actions-item">
+            <Link to="/playlist/:playlistId" className="video-actions-item">
               <div className="video-actions-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -63,8 +64,8 @@ const VideoCard = ({ image, time, logo, title, subscribers, views, likes }) => {
                 </svg>
               </div>
               <div>Add To Playlist</div>
-            </a>
-            <a href="#" className="video-actions-item">
+            </Link>
+            <Link to="/watchlater/:watchlaterId" className="video-actions-item">
               <div className="video-actions-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +84,7 @@ const VideoCard = ({ image, time, logo, title, subscribers, views, likes }) => {
                 </svg>
               </div>
               <div>Add To Watch Later</div>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
