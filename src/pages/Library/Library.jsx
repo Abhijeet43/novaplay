@@ -1,13 +1,14 @@
 import React from "react";
 import "./Library.css";
 import { MobileNav } from "../../components";
+import { Link } from "react-router-dom";
 
 const Library = () => {
   return (
     <main className="main-section">
       <MobileNav />
       <section className="library-section">
-        <a href="#" className="drawer-item">
+        <Link to="/playlist" href="#" className="drawer-item">
           <div className="drawer-item-icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -26,8 +27,8 @@ const Library = () => {
             </svg>
           </div>
           <div>Playlist</div>
-        </a>
-        <a href="#" className="drawer-item">
+        </Link>
+        <Link to="/watchlater" href="#" className="drawer-item">
           <div className="drawer-item-icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -46,8 +47,8 @@ const Library = () => {
             </svg>
           </div>
           <div>Watch Later</div>
-        </a>
-        <a href="#" className="drawer-item">
+        </Link>
+        <Link to="/liked" href="#" className="drawer-item">
           <div className="drawer-item-icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -66,8 +67,8 @@ const Library = () => {
             </svg>
           </div>
           <div>Liked</div>
-        </a>
-        <a href="#" className="drawer-item">
+        </Link>
+        <Link to="/history" className="drawer-item">
           <div className="drawer-item-icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +87,7 @@ const Library = () => {
             </svg>
           </div>
           <div>History</div>
-        </a>
+        </Link>
       </section>
     </main>
   );
