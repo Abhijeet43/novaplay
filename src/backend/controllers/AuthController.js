@@ -2,6 +2,7 @@ import { v4 as uuid } from "uuid";
 import { Response } from "miragejs";
 import { formatDate } from "../utils/authUtils";
 const sign = require("jwt-encode");
+
 /**
  * All the routes related to Auth are present here.
  * These are Publicly accessible routes.
@@ -35,9 +36,8 @@ export const signupHandler = function (schema, request) {
       createdAt: formatDate(),
       updatedAt: formatDate(),
       ...rest,
-      likes: [],
-      history: [],
-      playlists: [],
+      cart: [],
+      wishlist: [],
     };
     const createdUser = schema.users.create(newUser);
     const encodedToken = sign({ _id, email }, process.env.REACT_APP_JWT_SECRET);
