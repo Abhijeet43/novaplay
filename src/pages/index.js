@@ -6,3 +6,4 @@ export { VideoPlay } from "./VideoPlay/VideoPlay";
 export { Playlist } from "./Playlist/Playlist";
 export { Liked } from "./Liked/Liked";
 export { Library } from "./Library/Library";
+export { History } from "./History/History";

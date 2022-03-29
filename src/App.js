@@ -1,6 +1,11 @@
 import React from "react";
 import { Header, Footer } from "./components/";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import {
   Home,
   Explore,
@@ -10,9 +15,14 @@ import {
   Playlist,
   Login,
   Signup,
+  History,
 } from "./pages/";
+import { useAuth } from "./context/";
 
 const App = () => {
+  const {
+    authState: { token },
+  } = useAuth();
   return (
     <Router>
       <Header />
@@ -22,9 +32,19 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/explore" element={<Explore />} />
         <Route path="/explore/:categoryId" element={<Explore />} />
-        <Route path="/liked" element={<Liked />} />
+        <Route
+          path="/liked"
+          element={token ? <Liked /> : <Navigate to="/login" />}
+        />
         <Route path="/videoplay/:videoId" element={<VideoPlay />} />
-        <Route path="/playlist" element={<Playlist />} />
+        <Route
+          path="/playlist"
+          element={token ? <Playlist /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/history"
+          element={token ? <History /> : <Navigate to="/login" />}
+        />
         <Route path="/library" element={<Library />} />
       </Routes>
       <Footer />
