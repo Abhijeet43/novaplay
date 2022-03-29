@@ -1,50 +1,28 @@
 import React from "react";
 import "./RelatedVideos.css";
 import { HorizontalCard } from "../../../../../../components";
+import { useVideo } from "../../../../../../context/";
+import { getCategoryVideos } from "../../../../../../utils";
 
-const RelatedVideos = ({ image, time, title, channelName }) => {
+const RelatedVideos = ({ category, id }) => {
+  const {
+    videoState: { videos },
+  } = useVideo();
+  const categoryVideos = getCategoryVideos(category, id, videos);
   return (
     <div className="related-videos">
-      <HorizontalCard
-        miniCard={true}
-        miniImg={true}
-        miniText={true}
-        miniTitle={true}
-        image={image}
-        time={time}
-        title={title}
-        channelName={channelName}
-      />
-      <HorizontalCard
-        miniCard={true}
-        miniImg={true}
-        miniText={true}
-        miniTitle={true}
-        image={image}
-        time={time}
-        title={title}
-        channelName={channelName}
-      />
-      <HorizontalCard
-        miniCard={true}
-        miniImg={true}
-        miniText={true}
-        miniTitle={true}
-        image={image}
-        time={time}
-        title={title}
-        channelName={channelName}
-      />
-      <HorizontalCard
-        miniCard={true}
-        miniImg={true}
-        miniText={true}
-        miniTitle={true}
-        image={image}
-        time={time}
-        title={title}
-        channelName={channelName}
-      />
+      {categoryVideos.map((video) => {
+        return (
+          <HorizontalCard
+            key={video._id}
+            video={video}
+            miniCard={true}
+            miniImg={true}
+            miniText={true}
+            miniTitle={true}
+          />
+        );
+      })}
     </div>
   );
 };

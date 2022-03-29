@@ -3,29 +3,45 @@ import "./VideoPlay.css";
 import { AppDrawer, MobileNav } from "../../components/";
 import { Video } from "./components/Video/Video";
 import { VideoDetails } from "./components/VideoDetails/VideoDetails";
+import { useParams } from "react-router-dom";
+import { useVideo } from "../../context/";
+import { getVideo } from "../../utils/";
 
 const VideoPlay = () => {
+  const {
+    videoState: { videos },
+  } = useVideo();
+  const { videoId } = useParams();
+  const videoDetails = getVideo(videoId, videos);
+  const {
+    _id,
+    youtubeId,
+    title,
+    views,
+    likes,
+    channelLogo: logo,
+    channelName: name,
+    subscribers,
+    description,
+    category,
+  } = videoDetails;
   return (
     <main className="main-section">
       <AppDrawer />
       <MobileNav />
       <section className="videos-section">
         <div className="single-video-container">
-          <Video link={"https://www.youtube.com/embed/Azy6DD2bDHg"} />
+          <Video youtubeId={youtubeId} />
           <VideoDetails
-            title={
-              "Teach life skills and change our world: Jill Siegal Chalsty"
-            }
-            views={"3.6M"}
-            likes={"98K"}
-            logo={
-              "https://yt3.ggpht.com/ytc/AKedOLQGnY6McntoY-eWaRDI047FWFqj7pVlw2nBfkwz7w=s68-c-k-c0x00ffffff-no-rj"
-            }
-            name={"Ted Talks"}
-            subscribers={"2M"}
-            description={
-              "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cumque facerevero adipisci quo voluptates. Itaque repellendus officiis modi erroromnis quibusdam cum libero quos quaerat quod, molestias fuga optio aut."
-            }
+            id={_id}
+            title={title}
+            views={views}
+            likes={likes}
+            logo={logo}
+            name={name}
+            subscribers={subscribers}
+            description={description}
+            category={category}
           />
         </div>
       </section>
