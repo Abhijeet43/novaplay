@@ -1,8 +1,31 @@
 import React from "react";
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/";
 
 const Header = () => {
+  const {
+    authState: { token, user },
+    authDispatch,
+  } = useAuth();
+
+  const navigate = useNavigate();
+
+  const checkStatus = (token) => {
+    return token ? "Logout" : "Login";
+  };
+
+  const logoutHandler = () => {
+    navigate("/");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    authDispatch({ type: "LOGOUT" });
+  };
+
+  const loginActionHandler = (type) => {
+    type === "Login" ? navigate("/login") : logoutHandler();
+  };
+
   return (
     <header>
       <nav className="navbar">
@@ -22,10 +45,14 @@ const Header = () => {
           />
         </div>
         <ul className="nav-items">
+          <li className="nav-item">{token ? `Hi ${user.firstName}` : ""}</li>
           <li className="nav-item">
-            <Link to="/login" className="btn btn-primary">
-              Login
-            </Link>
+            <button
+              onClick={() => loginActionHandler(checkStatus(token))}
+              className="btn btn-primary"
+            >
+              {checkStatus(token)}
+            </button>
           </li>
         </ul>
       </nav>
