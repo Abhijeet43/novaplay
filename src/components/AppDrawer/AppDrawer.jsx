@@ -25,7 +25,7 @@ const AppDrawer = () => {
         </div>
         <div className="drawer-item-text">Home</div>
       </NavLink>
-      <NavLink to="/explore/:all" className="drawer-item">
+      <NavLink to="/explore" className="drawer-item">
         <div className="drawer-item-icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
