@@ -34,16 +34,16 @@ const App = () => {
         <Route path="/explore/:categoryId" element={<Explore />} />
         <Route
           path="/liked"
-          element={token ? <Liked /> : <Navigate to="/" />}
+          element={token ? <Liked /> : <Navigate to="/login" />}
         />
         <Route path="/videoplay/:videoId" element={<VideoPlay />} />
         <Route
           path="/playlist"
-          element={token ? <Playlist /> : <Navigate to="/" />}
+          element={token ? <Playlist /> : <Navigate to="/login" />}
         />
         <Route
           path="/history"
-          element={token ? <History /> : <Navigate to="/" />}
+          element={token ? <History /> : <Navigate to="/login" />}
         />
         <Route path="/library" element={<Library />} />
       </Routes>
