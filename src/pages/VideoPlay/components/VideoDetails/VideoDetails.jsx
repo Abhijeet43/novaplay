@@ -1,10 +1,10 @@
 import React from "react";
 import "./VideoDetails.css";
-import { imageOne } from "../../../../assets/";
 import { VideoDescription } from "./components/VideoDescription/VideoDescription";
 import { RelatedVideos } from "./components/RelatedVideos/RelatedVideos";
 
 const VideoDetails = ({
+  id,
   title,
   views,
   likes,
@@ -12,6 +12,7 @@ const VideoDetails = ({
   name,
   subscribers,
   description,
+  category,
 }) => {
   return (
     <div className="single-video-details-container">
@@ -24,12 +25,7 @@ const VideoDetails = ({
         subscribers={subscribers}
         description={description}
       />
-      <RelatedVideos
-        image={imageOne}
-        time={"3:20"}
-        title={"Teach life skills and change our world: Jill Siegal Chalsty"}
-        channelName={"Ted Talks"}
-      />
+      <RelatedVideos category={category} id={id} />
     </div>
   );
 };

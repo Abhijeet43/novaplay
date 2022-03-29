@@ -2,13 +2,26 @@ import React from "react";
 import "./VideoCard.css";
 import { Link } from "react-router-dom";
 
-const VideoCard = ({ image, time, logo, title, subscribers, views, likes }) => {
+const VideoCard = ({ video }) => {
+  const {
+    _id,
+    title,
+    videoLength: time,
+    thumbnail: image,
+    likes,
+    channelName,
+    subscribers,
+    views,
+    channelLogo: logo,
+  } = video;
   return (
     <div className="video-card">
       <div className="video-card-header">
-        <div className="video-card-thumbnail">
-          <img src={image} alt="video-thumbnail" />
-        </div>
+        <Link to={`/videoplay/${_id}`}>
+          <div className="video-card-thumbnail">
+            <img src={image} alt="video-thumbnail" />
+          </div>
+        </Link>
         <div className="video-time">{time}</div>
       </div>
       <div className="video-card-body">
@@ -16,8 +29,10 @@ const VideoCard = ({ image, time, logo, title, subscribers, views, likes }) => {
           <img src={logo} />
         </div>
         <div className="video-card-text">
-          <h3 className="video-card-title">{title}</h3>
-          <p className="video-channel-name">Ted Talks</p>
+          <Link to={`/videoplay/${_id}`}>
+            <h3 className="video-card-title">{title}</h3>
+          </Link>
+          <p className="video-channel-name">{channelName}</p>
           <div className="video-stats">
             <p>{subscribers} Subscribers</p>
             <span className="video-stats-dot"></span>
@@ -27,21 +42,10 @@ const VideoCard = ({ image, time, logo, title, subscribers, views, likes }) => {
           </div>
         </div>
         <div className="video-actions">
-          <div className="video-actions-menu-icon">
-            <svg
-              id="Layer_1"
-              data-name="Layer 1"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 29.96 122.88"
-              className="dots-icon"
-            >
-              <defs></defs>
-              <title>3-vertical-dots</title>
-              <path
-                className="cls-1"
-                d="M15,0A15,15,0,1,1,0,15,15,15,0,0,1,15,0Zm0,92.93a15,15,0,1,1-15,15,15,15,0,0,1,15-15Zm0-46.47a15,15,0,1,1-15,15,15,15,0,0,1,15-15Z"
-              />
-            </svg>
+          <div className="video-actions-menu-button-wrapper">
+            <button className="video-menu-button">
+              <i className="menu-icon fa-solid fa-ellipsis-vertical"></i>
+            </button>
           </div>
 
           <div className="video-actions-menu">

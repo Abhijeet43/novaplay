@@ -3,76 +3,62 @@ import "./HorizontalCard.css";
 import { Link } from "react-router-dom";
 
 const HorizontalCard = ({
-  image,
-  time,
-  title,
-  channelName,
-  subscribers,
-  views,
-  likes,
-  description,
-  miniCard,
-  miniImg,
-  miniTitle,
-  miniText,
+  video,
+  miniCard = false,
+  miniImg = false,
+  miniTitle = false,
+  miniText = false,
 }) => {
+  const {
+    _id,
+    thumbnail: image,
+    videoLength: time,
+    title,
+    channelName,
+    subscribers,
+    views,
+    likes,
+    description,
+  } = video;
   return (
     <div
       className={`horizontal-video-card ${
         miniCard === true ? "horizontal-card-mini" : ""
       }`}
     >
-      <img
-        className={` ${
-          miniImg === true ? "horizontal-img-mini" : "horizontal-video-img"
-        }`}
-        src={image}
-        alt="video-img"
-      />
-      <div className="video-time">{time}</div>
+      <Link to={`/videoPlay/${_id}`}>
+        <div className="horizontal-video-img-container">
+          <img className="horizontal-video-img" src={image} alt="video-img" />
+          <div className="video-time">{time}</div>
+        </div>
+      </Link>
       <div className="video-card-body">
-        <div className="video-card-text">
-          <h3
-            className={miniTitle === true ? "video-title-mini" : "video-title"}
-          >
-            {title}
-          </h3>
+        <div className={miniText ? "video-card-text-mini" : "video-card-text"}>
+          <Link to={`/videoPlay/${_id}`}>
+            <h3
+              className={
+                miniTitle === true ? "video-title-mini" : "video-title"
+              }
+            >
+              {title}
+            </h3>
+          </Link>
           <p className="video-channel-name">{channelName}</p>
-          {!likes || !views || !subscribers ? null : (
-            <div className="video-stats">
-              <p>{subscribers} Subscribers</p>
-              <span className="video-stats-dot"></span>
-              <p>{views} Views</p>
-              <span className="video-stats-dot"></span>
-              <p>{likes} Likes</p>
-            </div>
-          )}
-          <div
-            className={
-              miniText === true
-                ? "video-description-text-mini"
-                : "video-description-text"
-            }
-          >
-            {description}
+          <div className="video-stats">
+            <p>{subscribers} Subscribers</p>
+            <span className="video-stats-dot"></span>
+            <p>{views} Views</p>
+            <span className="video-stats-dot"></span>
+            <p>{likes} Likes</p>
           </div>
+          <div className="video-description-text">{description}</div>
         </div>
         <div className="video-actions">
-          <button className="video-actions-menu-icon">
-            <svg
-              id="Layer_1"
-              data-name="Layer 1"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 29.96 122.88"
-            >
-              <defs></defs>
-              <title>3-vertical-dots</title>
-              <path
-                className="cls-1"
-                d="M15,0A15,15,0,1,1,0,15,15,15,0,0,1,15,0Zm0,92.93a15,15,0,1,1-15,15,15,15,0,0,1,15-15Zm0-46.47a15,15,0,1,1-15,15,15,15,0,0,1,15-15Z"
-              />
-            </svg>
-          </button>
+          <div className="video-actions-menu-button-wrapper">
+            <button className="video-menu-button">
+              <i className="menu-icon fa-solid fa-ellipsis-vertical"></i>
+            </button>
+          </div>
           <div className="video-actions-menu">
             <Link to="/playlist/:playlistId" className="video-actions-item">
               <div className="video-actions-icon">

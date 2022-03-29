@@ -1,9 +1,11 @@
 .video-card {
   position: relative;
   width: 33rem;
+  height: 31rem;
   cursor: pointer;
   border-radius: 0.25rem;
   transform: scale(1);
+  color: var(--black-color);
   box-shadow: 0 1.95px 2.6px rgb(0 0 0 / 15%);
   transition: transform 0.2s ease-in-out;
 }
@@ -14,6 +16,7 @@
 
 .video-card:hover {
   transform: scale(1.1);
+  z-index: 2;
 }
 
 .video-card-header {
@@ -33,7 +36,7 @@
 
 .video-time {
   position: absolute;
-  bottom: 0.3rem;
+  bottom: 1rem;
   left: 0.5rem;
   background: rgba(0, 0, 0, 0.8);
   padding: 0.5rem;
@@ -82,6 +85,7 @@
 
 .video-card-title {
   font-size: var(--font-size-6);
+  color: var(--black-color);
 }
 
 .video-channel-name {
@@ -100,6 +104,18 @@
 }
 
 /* VIDEO ACTIONS MENU */
+
+.video-actions-menu-button-wrapper {
+  border-radius: 50%;
+}
+
+.video-menu-button {
+  padding: 0 0.2rem;
+}
+
+.menu-icon {
+  font-size: var(--font-size-6);
+}
 
 .video-actions-menu {
   transform: scale(0);
