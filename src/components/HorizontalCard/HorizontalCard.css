@@ -70,4 +70,16 @@
   .horizontal-video-card {
     width: 90%;
   }
+
+  .horizontal-card-mini {
+    height: 11rem;
+  }
+
+  .video-description-text {
+    display: none;
+  }
+
+  .video-title-mini {
+    font-size: var(--font-size-7);
+  }
 }
