@@ -27,6 +27,10 @@
   color: var(--black-color);
 }
 
+.btn-danger {
+  background: var(--danger-color);
+}
+
 .btn-secondary:hover {
   background: var(--primary-color);
   color: var(--secondary-color);

@@ -17,6 +17,7 @@ const VideoDetails = ({
   return (
     <div className="single-video-details-container">
       <VideoDescription
+        id={id}
         title={title}
         views={views}
         likes={likes}

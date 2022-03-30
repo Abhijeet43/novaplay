@@ -21,29 +21,35 @@ import { useAuth } from "./context/";
 
 const App = () => {
   const {
-    authState: { token },
+    authState: { token, user },
   } = useAuth();
   return (
     <Router>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/login"
+          element={token ? <Navigate replace to="/" /> : <Login />}
+        />
+        <Route
+          path="/signup"
+          element={token ? <Navigate replace to="/" /> : <Signup />}
+        />
         <Route path="/explore" element={<Explore />} />
         <Route path="/explore/:categoryId" element={<Explore />} />
         <Route
           path="/liked"
-          element={token ? <Liked /> : <Navigate to="/login" />}
+          element={user ? <Liked /> : <Navigate replace to="/login" />}
         />
         <Route path="/videoplay/:videoId" element={<VideoPlay />} />
         <Route
           path="/playlist"
-          element={token ? <Playlist /> : <Navigate to="/login" />}
+          element={token ? <Playlist /> : <Navigate replace to="/login" />}
         />
         <Route
           path="/history"
-          element={token ? <History /> : <Navigate to="/login" />}
+          element={token ? <History /> : <Navigate replace to="/login" />}
         />
         <Route path="/library" element={<Library />} />
       </Routes>

@@ -2,49 +2,21 @@ import React from "react";
 import "./VideoList.css";
 import { HorizontalCard } from "../../../../components";
 
-const VideoList = ({ image, time, title, channelName }) => {
+const VideoList = ({ likes }) => {
   return (
     <div className="video-list">
-      <HorizontalCard
-        miniCard={true}
-        miniImg={true}
-        miniText={true}
-        miniTitle={true}
-        image={image}
-        time={time}
-        title={title}
-        channelName={channelName}
-      />
-      <HorizontalCard
-        miniCard={true}
-        miniImg={true}
-        miniText={true}
-        miniTitle={true}
-        image={image}
-        time={time}
-        title={title}
-        channelName={channelName}
-      />
-      <HorizontalCard
-        miniCard={true}
-        miniImg={true}
-        miniText={true}
-        miniTitle={true}
-        image={image}
-        time={time}
-        title={title}
-        channelName={channelName}
-      />
-      <HorizontalCard
-        miniCard={true}
-        miniImg={true}
-        miniText={true}
-        miniTitle={true}
-        image={image}
-        time={time}
-        title={title}
-        channelName={channelName}
-      />
+      {likes.map((video) => {
+        return (
+          <HorizontalCard
+            key={video._id}
+            video={video}
+            mediumCard={true}
+            miniImg={true}
+            miniText={true}
+            miniTitle={true}
+          />
+        );
+      })}
     </div>
   );
 };
