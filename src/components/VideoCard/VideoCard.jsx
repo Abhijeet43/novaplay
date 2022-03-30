@@ -1,14 +1,34 @@
 import React from "react";
 import "./VideoCard.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useToggle } from "../../hooks/useToggle";
+import { useLike, useAuth, useVideo } from "../../context/";
+import { checkLikesAction, likesActionHandler } from "../../utils/";
 
 const VideoCard = ({ video }) => {
+  const [showMenu, setShowMenu] = useToggle(false);
+
+  const {
+    likeState: { likes },
+    likeDispatch,
+  } = useLike();
+
+  const {
+    authState: { token },
+  } = useAuth();
+
+  const {
+    videoState: { videos },
+  } = useVideo();
+
+  const navigate = useNavigate();
+
   const {
     _id,
     title,
     videoLength: time,
     thumbnail: image,
-    likes,
+    likes: videoLikes,
     channelName,
     subscribers,
     views,
@@ -26,7 +46,7 @@ const VideoCard = ({ video }) => {
       </div>
       <div className="video-card-body">
         <div className="video-card-icon">
-          <img src={logo} />
+          <img src={logo} allt="channel-logo" />
         </div>
         <div className="video-card-text">
           <Link to={`/videoplay/${_id}`}>
@@ -38,18 +58,18 @@ const VideoCard = ({ video }) => {
             <span className="video-stats-dot"></span>
             <p>{views} Views</p>
             <span className="video-stats-dot"></span>
-            <p>{likes} Likes</p>
+            <p>{videoLikes} Likes</p>
           </div>
         </div>
         <div className="video-actions">
           <div className="video-actions-menu-button-wrapper">
-            <button className="video-menu-button">
+            <button className="video-menu-button" onClick={setShowMenu}>
               <i className="menu-icon fa-solid fa-ellipsis-vertical"></i>
             </button>
           </div>
 
-          <div className="video-actions-menu">
-            <Link to="/playlist/:playlistId" className="video-actions-item">
+          <div className={`video-actions-menu ${showMenu ? "active" : ""}`}>
+            <div className="video-actions-item">
               <div className="video-actions-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -68,8 +88,8 @@ const VideoCard = ({ video }) => {
                 </svg>
               </div>
               <div>Add To Playlist</div>
-            </Link>
-            <Link to="/watchlater/:watchlaterId" className="video-actions-item">
+            </div>
+            <div className="video-actions-item">
               <div className="video-actions-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +108,34 @@ const VideoCard = ({ video }) => {
                 </svg>
               </div>
               <div>Add To Watch Later</div>
-            </Link>
+            </div>
+
+            <div
+              className="video-actions-item"
+              onClick={() =>
+                likesActionHandler(
+                  _id,
+                  token,
+                  likeDispatch,
+                  navigate,
+                  videos,
+                  likes
+                )
+              }
+            >
+              <div className="video-actions-icon">
+                <i
+                  className={`${
+                    checkLikesAction(_id, likes) ? "fa-solid" : "fa-regular"
+                  } fa-thumbs-up`}
+                ></i>
+              </div>
+              <div>
+                {checkLikesAction(_id, likes)
+                  ? "Remove From Likes"
+                  : "Like Video"}
+              </div>
+            </div>
           </div>
         </div>
       </div>
