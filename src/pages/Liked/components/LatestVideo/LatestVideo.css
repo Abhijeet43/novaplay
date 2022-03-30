@@ -8,6 +8,10 @@
   margin: 1rem 0;
 }
 
+hr {
+  margin: 1rem 0;
+}
+
 /* MEDIA QUERIES */
 
 @media (max-width: 540px) {
