@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
-import { VideoProvider, AuthProvider } from "./context/";
+import { VideoProvider, AuthProvider, LikeProvider } from "./context/";
 
 // Call make Server
 makeServer();
@@ -11,9 +11,11 @@ makeServer();
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
-      <VideoProvider>
-        <App />
-      </VideoProvider>
+      <LikeProvider>
+        <VideoProvider>
+          <App />
+        </VideoProvider>
+      </LikeProvider>
     </AuthProvider>
   </React.StrictMode>,
   document.getElementById("root")
