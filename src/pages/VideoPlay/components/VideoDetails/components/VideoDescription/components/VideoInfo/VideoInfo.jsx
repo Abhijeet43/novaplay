@@ -3,11 +3,11 @@ import "./VideoInfo.css";
 import { VideoStats } from "./components/VideoStats/VideoStats";
 import { VideoInfoActions } from "./components/VideoInfoActions/VideoInfoActions";
 
-const VideoInfo = ({ views, likes }) => {
+const VideoInfo = ({ views, likes, id }) => {
   return (
     <div className="video-info-container">
-      <VideoStats views={views} likes={likes} />
-      <VideoInfoActions />
+      <VideoStats views={views} />
+      <VideoInfoActions id={id} likes={likes} />
     </div>
   );
 };

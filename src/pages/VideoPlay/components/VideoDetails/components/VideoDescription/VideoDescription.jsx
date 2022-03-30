@@ -4,6 +4,7 @@ import { VideoInfo } from "./components/VideoInfo/VideoInfo";
 import { ChannelInfo } from "./components/ChannelInfo/ChannelInfo";
 
 const VideoDescription = ({
+  id,
   title,
   logo,
   views,
@@ -15,7 +16,7 @@ const VideoDescription = ({
   return (
     <div className="single-video-description">
       <h3 className="single-video-title">{title}</h3>
-      <VideoInfo views={views} likes={likes} />
+      <VideoInfo views={views} likes={likes} id={id} />
       <hr />
       <ChannelInfo
         logo={logo}

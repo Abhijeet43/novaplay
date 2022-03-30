@@ -1,26 +1,44 @@
 import React from "react";
 import "./VideoInfoActions.css";
+import { useNavigate } from "react-router-dom";
+import {
+  checkLikesAction,
+  likesActionHandler,
+} from "../../../../../../../../../../utils/";
+import {
+  useAuth,
+  useLike,
+  useVideo,
+} from "../../../../../../../../../../context/";
 
-const VideoInfoActions = () => {
+const VideoInfoActions = ({ id, likes: channelLikes }) => {
+  const {
+    videoState: { videos },
+  } = useVideo();
+  const {
+    authState: { token },
+  } = useAuth();
+  const {
+    likeState: { likes },
+    likeDispatch,
+  } = useLike();
+
+  const navigate = useNavigate();
+
   return (
     <div className="video-info-actions">
-      <button className="video-action-btn">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-          role="img"
-          className="action-icon iconify iconify--bx"
-          width="1em"
-          height="1em"
-          preserveAspectRatio="xMidYMid meet"
-          viewBox="0 0 24 24"
-        >
-          <path
-            fill="currentColor"
-            d="M20 8h-5.612l1.123-3.367c.202-.608.1-1.282-.275-1.802S14.253 2 13.612 2H12c-.297 0-.578.132-.769.36L6.531 8H4c-1.103 0-2 .897-2 2v9c0 1.103.897 2 2 2h13.307a2.01 2.01 0 0 0 1.873-1.298l2.757-7.351A1 1 0 0 0 22 12v-2c0-1.103-.897-2-2-2zM4 10h2v9H4v-9zm16 1.819L17.307 19H8V9.362L12.468 4h1.146l-1.562 4.683A.998.998 0 0 0 13 10h7v1.819z"
-          ></path>
-        </svg>
-        30K
+      <button
+        className="video-action-btn"
+        onClick={() =>
+          likesActionHandler(id, token, likeDispatch, navigate, videos, likes)
+        }
+      >
+        <i
+          className={`${
+            checkLikesAction(id, likes) ? "fa-solid" : "fa-regular"
+          } fa-thumbs-up action-icon`}
+        ></i>
+        {channelLikes}
       </button>
       <button className="video-action-btn">
         <svg
