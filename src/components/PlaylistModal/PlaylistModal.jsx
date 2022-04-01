@@ -32,7 +32,7 @@ const PlaylistModal = () => {
   } = usePlayListModal();
 
   const playlistNameHandler = (e) => {
-    setNewPlaylist({ ...newPlaylist, title: e.target.value.trim() });
+    setNewPlaylist({ ...newPlaylist, title: e.target.value });
   };
 
   const createPlaylistHandler = () => {
