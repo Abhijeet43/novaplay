@@ -5,17 +5,25 @@ import {
   removeFromLikesHandler,
   checkLikesAction,
   likesActionHandler,
+  removeFromPlaylist,
+  openModal,
 } from "../../utils/";
-import { useAuth, useLike, useVideo } from "../../context/";
+import {
+  useAuth,
+  useLike,
+  useVideo,
+  usePlaylist,
+  usePlayListModal,
+} from "../../context/";
 import { useToggle } from "../../hooks/useToggle";
 
 const HorizontalCard = ({
   video,
   miniCard = false,
-  miniImg = false,
   miniTitle = false,
   miniText = false,
   mediumCard = false,
+  playlistId = false,
 }) => {
   const [showMenu, setShowMenu] = useToggle(false);
 
@@ -32,7 +40,16 @@ const HorizontalCard = ({
     likeDispatch,
   } = useLike();
 
+  const { playlistDispatch } = usePlaylist();
+
+  const { playlistModalDispatch } = usePlayListModal();
+
   const navigate = useNavigate();
+
+  const playlistHandler = () => {
+    setShowMenu(false);
+    openModal({ token, playlistModalDispatch, video, navigate });
+  };
 
   const {
     _id,
@@ -82,7 +99,16 @@ const HorizontalCard = ({
           <div>
             <button
               className="remove-video-icon"
-              onClick={() => removeFromLikesHandler(_id, token, likeDispatch)}
+              onClick={() =>
+                playlistId
+                  ? removeFromPlaylist({
+                      token,
+                      video,
+                      playlistId,
+                      playlistDispatch,
+                    })
+                  : removeFromLikesHandler(_id, token, likeDispatch)
+              }
             >
               <i className="fa-solid fa-trash"></i>
             </button>
@@ -95,7 +121,7 @@ const HorizontalCard = ({
               </button>
             </div>
             <div className={`video-actions-menu ${showMenu ? "active" : ""}`}>
-              <div className="video-actions-item">
+              <div className="video-actions-item" onClick={playlistHandler}>
                 <div className="video-actions-icon">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
