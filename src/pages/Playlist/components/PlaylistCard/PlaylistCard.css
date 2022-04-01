@@ -6,6 +6,8 @@
 
 .playlist-img {
   border-radius: 1rem;
+  object-fit: cover;
+  height: 99%;
 }
 
 .playlist-card.create {
