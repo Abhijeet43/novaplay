@@ -1,0 +1,88 @@
+.modal-container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  transform: scale(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.modal-container.active {
+  transform: scale(1);
+}
+
+.playlist-modal {
+  max-width: 25rem;
+  width: 100%;
+  background: var(--secondary-color);
+}
+
+.playlist-modal-header {
+  padding: 1rem;
+  padding-bottom: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.playlist-modal-body {
+  max-height: 15rem;
+  overflow-y: scroll;
+}
+
+.playlist-modal-title {
+  font-size: var(--font-size-4);
+  color: var(--black-color);
+}
+
+.input-group {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.playlist-modal-label {
+  font-size: var(--font-size-5);
+  color: var(--black-color);
+  margin-left: 1rem;
+}
+
+.playlist-modal-footer {
+  padding: 1rem;
+  padding-top: 0;
+  text-align: right;
+}
+
+.create-btn-playlist {
+  font-size: var(--font-size-4);
+  padding: 0.5rem;
+  background: var(--lynx-purple-color);
+}
+
+.playlist-input {
+  border: none;
+  border-bottom: 0.3rem solid var(--primary-color);
+}
+
+.playlist-input:focus {
+  outline: none;
+}
+
+.create-btn {
+  padding: 0.5rem;
+  color: var(--secondary-color);
+  border-radius: 18px;
+  transition: transform 0.2s ease;
+}
+
+.create-btn:hover {
+  transform: scale(1.1);
+}
+
+.create-icon {
+  margin-right: 1rem;
+}
