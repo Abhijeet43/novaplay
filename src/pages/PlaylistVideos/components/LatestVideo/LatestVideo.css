@@ -1,0 +1,21 @@
+.latest-video-featured {
+  margin: 1rem;
+  background: var(---secondary-color);
+}
+
+.featured-title {
+  font-size: var(--font-size-3);
+  margin: 1rem 0;
+}
+
+hr {
+  margin: 1rem 0;
+}
+
+/* MEDIA QUERIES */
+
+@media (max-width: 540px) {
+  .featured-title {
+    text-align: center;
+  }
+}

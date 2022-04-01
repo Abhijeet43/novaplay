@@ -15,6 +15,7 @@ import time from "./time-mgmt.jpg";
 import lifeSkills from "./life-skills.jpg";
 import psychology from "./psychology.jpg";
 import science from "./science.jpg";
+import defaultPlaylist from "./default-playlist.jpg";
 
 export {
   imageOne,
@@ -34,4 +35,5 @@ export {
   lifeSkills,
   psychology,
   science,
+  defaultPlaylist,
 };

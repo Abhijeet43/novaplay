@@ -1,6 +1,6 @@
 import React from "react";
 import "./VideoPlay.css";
-import { AppDrawer, MobileNav } from "../../components/";
+import { AppDrawer, MobileNav, PlaylistModal } from "../../components/";
 import { Video } from "./components/Video/Video";
 import { VideoDetails } from "./components/VideoDetails/VideoDetails";
 import { useParams } from "react-router-dom";
@@ -29,6 +29,7 @@ const VideoPlay = () => {
     <main className="main-section">
       <AppDrawer />
       <MobileNav />
+      <PlaylistModal />
       <section className="videos-section">
         <div className="single-video-container">
           <Video youtubeId={youtubeId} />

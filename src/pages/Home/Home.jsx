@@ -13,6 +13,7 @@ import {
   VideoCard,
   AppDrawer,
   MobileNav,
+  PlaylistModal,
 } from "../../components/";
 
 const Home = () => {
@@ -23,6 +24,7 @@ const Home = () => {
     <main className="main-section">
       <AppDrawer />
       <MobileNav />
+      <PlaylistModal />
       <section className="videos-section">
         <div className="section-header">
           <h2 className="section-title">Featured Categories</h2>

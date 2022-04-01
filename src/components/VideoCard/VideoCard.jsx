@@ -2,11 +2,13 @@ import React from "react";
 import "./VideoCard.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useToggle } from "../../hooks/useToggle";
-import { useLike, useAuth, useVideo } from "../../context/";
-import { checkLikesAction, likesActionHandler } from "../../utils/";
+import { useLike, useAuth, useVideo, usePlayListModal } from "../../context/";
+import { checkLikesAction, likesActionHandler, openModal } from "../../utils/";
 
 const VideoCard = ({ video }) => {
   const [showMenu, setShowMenu] = useToggle(false);
+
+  const { playlistModalDispatch } = usePlayListModal();
 
   const {
     likeState: { likes },
@@ -22,6 +24,11 @@ const VideoCard = ({ video }) => {
   } = useVideo();
 
   const navigate = useNavigate();
+
+  const playlistHandler = () => {
+    setShowMenu(false);
+    openModal({ token, playlistModalDispatch, video, navigate });
+  };
 
   const {
     _id,
@@ -69,7 +76,7 @@ const VideoCard = ({ video }) => {
           </div>
 
           <div className={`video-actions-menu ${showMenu ? "active" : ""}`}>
-            <div className="video-actions-item">
+            <div className="video-actions-item" onClick={playlistHandler}>
               <div className="video-actions-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

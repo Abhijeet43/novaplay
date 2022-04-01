@@ -4,24 +4,32 @@ import { useNavigate } from "react-router-dom";
 import {
   checkLikesAction,
   likesActionHandler,
+  openModal,
 } from "../../../../../../../../../../utils/";
 import {
   useAuth,
   useLike,
   useVideo,
+  usePlayListModal,
 } from "../../../../../../../../../../context/";
 
 const VideoInfoActions = ({ id, likes: channelLikes }) => {
   const {
     videoState: { videos },
   } = useVideo();
+
   const {
     authState: { token },
   } = useAuth();
+
   const {
     likeState: { likes },
     likeDispatch,
   } = useLike();
+
+  const { playlistModalDispatch } = usePlayListModal();
+
+  const video = videos.find((video) => video._id === id);
 
   const navigate = useNavigate();
 
@@ -58,7 +66,12 @@ const VideoInfoActions = ({ id, likes: channelLikes }) => {
         </svg>
         Watch Later
       </button>
-      <button className="video-action-btn">
+      <button
+        onClick={() =>
+          openModal({ token, playlistModalDispatch, video, navigate })
+        }
+        className="video-action-btn"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
