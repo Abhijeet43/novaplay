@@ -16,6 +16,7 @@ import {
   Login,
   Signup,
   History,
+  PlaylistVideos,
 } from "./pages/";
 import { useAuth } from "./context/";
 
@@ -47,6 +48,7 @@ const App = () => {
           path="/playlist"
           element={token ? <Playlist /> : <Navigate replace to="/login" />}
         />
+        <Route path="/playlist/:playlistId" element={<PlaylistVideos />} />
         <Route
           path="/history"
           element={token ? <History /> : <Navigate replace to="/login" />}
