@@ -1,0 +1,14 @@
+.channel-description {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.channel-description-img {
+  width: 5rem;
+  border-radius: 50%;
+}
+
+.channel-name-featured {
+  font-size: var(--font-size-5);
+}
