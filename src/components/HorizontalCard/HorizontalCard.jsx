@@ -1,6 +1,6 @@
 import React from "react";
 import "./HorizontalCard.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import {
   removeFromLikesHandler,
   checkLikesAction,
@@ -10,6 +10,7 @@ import {
   checkWatchLaterAction,
   checkWatchLaterActionHandler,
   removeFromWatchLater,
+  removeFromHistory,
 } from "../../utils/";
 import {
   useAuth,
@@ -18,6 +19,7 @@ import {
   usePlaylist,
   usePlayListModal,
   useWatchLater,
+  useHistory,
 } from "../../context/";
 import { useToggle } from "../../hooks/useToggle";
 
@@ -28,7 +30,6 @@ const HorizontalCard = ({
   miniText = false,
   mediumCard = false,
   playlistId = false,
-  watchLaterCheck = false,
 }) => {
   const [showMenu, setShowMenu] = useToggle(false);
 
@@ -50,11 +51,14 @@ const HorizontalCard = ({
     watchLaterDispatch,
   } = useWatchLater();
 
+  const { historyDispatch } = useHistory();
+
   const { playlistDispatch } = usePlaylist();
 
   const { playlistModalDispatch } = usePlayListModal();
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const playlistHandler = () => {
     setShowMenu(false);
@@ -72,6 +76,31 @@ const HorizontalCard = ({
     likes: channelLikes,
     description,
   } = video;
+
+  const deleteAction = () => {
+    switch (location.pathname) {
+      case "/watchlater":
+        removeFromWatchLater(_id, token, watchLaterDispatch);
+        break;
+      case `/playlist/${playlistId}`:
+        removeFromPlaylist({
+          token,
+          video,
+          playlistId,
+          playlistDispatch,
+        });
+        break;
+      case "/history":
+        removeFromHistory(_id, token, historyDispatch);
+        break;
+      case "/liked":
+        removeFromLikesHandler(_id, token, likeDispatch);
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div
       className={`horizontal-video-card ${
@@ -107,21 +136,7 @@ const HorizontalCard = ({
         </div>
         {mediumCard === true ? (
           <div>
-            <button
-              className="remove-video-icon"
-              onClick={() =>
-                watchLaterCheck
-                  ? removeFromWatchLater(_id, token, watchLaterDispatch)
-                  : playlistId
-                  ? removeFromPlaylist({
-                      token,
-                      video,
-                      playlistId,
-                      playlistDispatch,
-                    })
-                  : removeFromLikesHandler(_id, token, likeDispatch)
-              }
-            >
+            <button className="remove-video-icon" onClick={deleteAction}>
               <i className="fa-solid fa-trash"></i>
             </button>
           </div>

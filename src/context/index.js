@@ -7,3 +7,4 @@ export {
   usePlayListModal,
 } from "./playlistModal-context";
 export { WatchLaterProvider, useWatchLater } from "./watchLater-context";
+export { HistoryProvider, useHistory } from "./history-context";

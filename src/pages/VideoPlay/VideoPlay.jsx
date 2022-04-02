@@ -1,18 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./VideoPlay.css";
 import { AppDrawer, MobileNav, PlaylistModal } from "../../components/";
 import { Video } from "./components/Video/Video";
 import { VideoDetails } from "./components/VideoDetails/VideoDetails";
 import { useParams } from "react-router-dom";
-import { useVideo } from "../../context/";
-import { getVideo } from "../../utils/";
+import { useVideo, useHistory, useAuth } from "../../context/";
+import { getVideo, addToHistory } from "../../utils/";
 
 const VideoPlay = () => {
   const {
     videoState: { videos },
   } = useVideo();
+
+  const {
+    authState: { token },
+  } = useAuth();
+
+  const {
+    historyState: { history },
+    historyDispatch,
+  } = useHistory();
+
   const { videoId } = useParams();
+
   const videoDetails = getVideo(videoId, videos);
+
+  useEffect(() => {
+    if (token && !history.some((video) => video._id === videoId)) {
+      addToHistory(videoDetails, historyDispatch, token);
+    }
+  }, [history, historyDispatch, token, videoDetails, videoId]);
+
   const {
     _id,
     youtubeId,
@@ -25,6 +43,7 @@ const VideoPlay = () => {
     description,
     category,
   } = videoDetails;
+
   return (
     <main className="main-section">
       <AppDrawer />

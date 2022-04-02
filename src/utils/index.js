@@ -34,3 +34,10 @@ export {
   checkWatchLaterActionHandler,
   getWatchLaterHandler,
 } from "./watchLater";
+
+export {
+  addToHistory,
+  getHistory,
+  removeFromHistory,
+  deleteAllHistory,
+} from "./history";
