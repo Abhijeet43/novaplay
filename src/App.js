@@ -17,6 +17,7 @@ import {
   Signup,
   History,
   PlaylistVideos,
+  WatchLater,
 } from "./pages/";
 import { useAuth } from "./context/";
 
@@ -54,6 +55,7 @@ const App = () => {
           element={token ? <History /> : <Navigate replace to="/login" />}
         />
         <Route path="/library" element={<Library />} />
+        <Route path="/watchlater" element={<WatchLater />} />
       </Routes>
       <Footer />
     </Router>
