@@ -13,7 +13,6 @@ const VideoList = ({ videos }) => {
             mediumCard={true}
             miniText={true}
             miniTitle={true}
-            watchLaterCheck={true}
           />
         );
       })}
