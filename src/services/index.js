@@ -9,3 +9,6 @@ export { createPlaylistService } from "./playlistServices/createPlaylist.service
 export { addToPlaylistService } from "./playlistServices/addToPlaylist.service";
 export { removeFromPlaylistService } from "./playlistServices/removeFromPlaylist.service";
 export { deletePlaylistService } from "./playlistServices/deletePlaylist.service";
+export { addToWatchLaterService } from "./watchLaterServices/addToWatchLater.service";
+export { removeFromWatchLaterService } from "./watchLaterServices/removeFromWatchLater.service";
+export { getWatchLaterService } from "./watchLaterServices/getWatchLater.service";
