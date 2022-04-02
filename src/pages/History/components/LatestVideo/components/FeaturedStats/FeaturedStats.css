@@ -1,0 +1,11 @@
+.featured-stats {
+  display: flex;
+  font-size: var(--font-size-6);
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 540px) {
+  .featured-stats {
+    justify-content: center;
+  }
+}
