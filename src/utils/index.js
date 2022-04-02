@@ -26,3 +26,11 @@ export {
 } from "./playlist";
 
 export { openModal } from "./playlistModal";
+
+export {
+  addToWatchLater,
+  removeFromWatchLater,
+  checkWatchLaterAction,
+  checkWatchLaterActionHandler,
+  getWatchLaterHandler,
+} from "./watchLater";

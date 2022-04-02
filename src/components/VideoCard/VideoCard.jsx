@@ -2,8 +2,20 @@ import React from "react";
 import "./VideoCard.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useToggle } from "../../hooks/useToggle";
-import { useLike, useAuth, useVideo, usePlayListModal } from "../../context/";
-import { checkLikesAction, likesActionHandler, openModal } from "../../utils/";
+import {
+  useLike,
+  useAuth,
+  useVideo,
+  usePlayListModal,
+  useWatchLater,
+} from "../../context/";
+import {
+  checkLikesAction,
+  likesActionHandler,
+  openModal,
+  checkWatchLaterAction,
+  checkWatchLaterActionHandler,
+} from "../../utils/";
 
 const VideoCard = ({ video }) => {
   const [showMenu, setShowMenu] = useToggle(false);
@@ -14,6 +26,11 @@ const VideoCard = ({ video }) => {
     likeState: { likes },
     likeDispatch,
   } = useLike();
+
+  const {
+    watchLaterState: { watchLater },
+    watchLaterDispatch,
+  } = useWatchLater();
 
   const {
     authState: { token },
@@ -96,27 +113,41 @@ const VideoCard = ({ video }) => {
               </div>
               <div>Add To Playlist</div>
             </div>
-            <div className="video-actions-item">
+            <div
+              className="video-actions-item"
+              onClick={() =>
+                checkWatchLaterActionHandler(
+                  _id,
+                  watchLater,
+                  token,
+                  watchLaterDispatch,
+                  navigate,
+                  videos
+                )
+              }
+            >
               <div className="video-actions-icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                  role="img"
-                  className="iconify iconify--carbon"
-                  width="1em"
-                  height="1em"
-                  preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 32 32"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M24 2H8a2 2 0 0 0-2 2v26l10-5.054L26 30V4a2 2 0 0 0-2-2Z"
-                  ></path>
-                </svg>
+                <i
+                  className={
+                    token
+                      ? `${
+                          checkWatchLaterAction(_id, watchLater)
+                            ? "fa-solid"
+                            : "fa-regular"
+                        } fa-bookmark`
+                      : "fa-regular fa-bookmark"
+                  }
+                ></i>
               </div>
-              <div>Add To Watch Later</div>
+              <div>
+                {" "}
+                {token
+                  ? checkWatchLaterAction(_id, watchLater)
+                    ? "Remove From Watch Later"
+                    : "Add To Watch Later"
+                  : "Add To Watch Later"}
+              </div>
             </div>
-
             <div
               className="video-actions-item"
               onClick={() =>

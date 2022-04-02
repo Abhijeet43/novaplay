@@ -8,3 +8,4 @@ export { Liked } from "./Liked/Liked";
 export { Library } from "./Library/Library";
 export { History } from "./History/History";
 export { PlaylistVideos } from "./PlaylistVideos/PlaylistVideos";
+export { WatchLater } from "./WatchLater/WatchLater";
