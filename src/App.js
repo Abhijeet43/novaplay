@@ -55,7 +55,10 @@ const App = () => {
           element={token ? <History /> : <Navigate replace to="/login" />}
         />
         <Route path="/library" element={<Library />} />
-        <Route path="/watchlater" element={<WatchLater />} />
+        <Route
+          path="/watchlater"
+          element={token ? <WatchLater /> : <Navigate replace to="/login" />}
+        />
       </Routes>
       <Footer />
     </Router>
