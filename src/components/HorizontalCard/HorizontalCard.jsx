@@ -168,16 +168,22 @@ const HorizontalCard = ({
               >
                 <div className="video-actions-icon">
                   <i
-                    className={`${
-                      checkWatchLaterAction(_id, watchLater)
-                        ? "fa-solid"
-                        : "fa-regular"
-                    } fa-bookmark`}
+                    className={
+                      token
+                        ? `${
+                            checkWatchLaterAction(_id, watchLater)
+                              ? "fa-solid"
+                              : "fa-regular"
+                          } fa-bookmark`
+                        : "fa-regular fa-bookmark"
+                    }
                   ></i>
                 </div>
                 <div>
-                  {checkWatchLaterAction(_id, watchLater)
-                    ? "Remove From Watch Later"
+                  {token
+                    ? checkWatchLaterAction(_id, watchLater)
+                      ? "Remove From Watch Later"
+                      : "Add To Watch Later"
                     : "Add To Watch Later"}
                 </div>
               </div>

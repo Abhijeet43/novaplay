@@ -70,11 +70,15 @@ const VideoInfoActions = ({ id, likes: channelLikes }) => {
         }
       >
         <i
-          className={`${
-            checkWatchLaterAction(video._id, watchLater)
-              ? "fa-solid"
-              : "fa-regular"
-          } fa-bookmark action-icon`}
+          className={
+            token
+              ? `${
+                  checkWatchLaterAction(video._id, watchLater)
+                    ? "fa-solid"
+                    : "fa-regular"
+                } fa-bookmark action-icon`
+              : "fa-regular fa-bookmark action-icon"
+          }
         ></i>
         Watch Later
       </button>
