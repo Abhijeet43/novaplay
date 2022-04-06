@@ -1,7 +1,7 @@
 import React from "react";
 import "./Home.css";
-import { Link } from "react-router-dom";
-import { useVideo } from "../../context/";
+import { useNavigate } from "react-router-dom";
+import { useVideo, useCategory } from "../../context/";
 import {
   getFeaturedVideos,
   getFeaturedCategories,
@@ -20,6 +20,16 @@ const Home = () => {
   const {
     videoState: { videos, categories },
   } = useVideo();
+
+  const { categoryDispatch } = useCategory();
+
+  const navigate = useNavigate();
+
+  const viewHandler = () => {
+    categoryDispatch({ type: "CLEAR_CATEGORY" });
+    navigate("/explore");
+  };
+
   return (
     <main className="main-section">
       <AppDrawer />
@@ -28,9 +38,9 @@ const Home = () => {
       <section className="videos-section">
         <div className="section-header">
           <h2 className="section-title">Featured Categories</h2>
-          <Link to="/explore" className="section-link">
+          <button onClick={viewHandler} className="section-link">
             View All
-          </Link>
+          </button>
         </div>
         <div className="video-card-container">
           {getFeaturedCategories(categories).map((cateogry) => {
@@ -39,9 +49,9 @@ const Home = () => {
         </div>
         <div className="section-header">
           <h2 className="section-title">Trending Videos</h2>
-          <Link to="/explore" className="section-link">
+          <button onClick={viewHandler} className="section-link">
             View All
-          </Link>
+          </button>
         </div>
         <div className="video-card-container">
           {getTrendingVideos(videos).map((video) => {
@@ -50,9 +60,9 @@ const Home = () => {
         </div>
         <div className="section-header">
           <h2 className="section-title">Featured Videos</h2>
-          <Link to="/explore" className="section-link">
+          <button onClick={viewHandler} className="section-link">
             View All
-          </Link>
+          </button>
         </div>
         <div className="video-card-container">
           {getFeaturedVideos(videos).map((video) => {
