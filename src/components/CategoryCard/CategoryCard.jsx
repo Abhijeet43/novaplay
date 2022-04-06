@@ -4,7 +4,7 @@ import { useCategory } from "../../context/";
 import { useNavigate } from "react-router-dom";
 
 const CategoryCard = ({ category }) => {
-  const { _id, categoryName, image } = category;
+  const { categoryName, image } = category;
 
   const { categoryDispatch } = useCategory();
 

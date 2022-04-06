@@ -17,7 +17,10 @@ const WatchLater = () => {
     watchLaterDispatch,
   } = useWatchLater();
 
-  useEffect(() => getWatchLaterHandler(token, watchLaterDispatch), []);
+  useEffect(
+    () => getWatchLaterHandler(token, watchLaterDispatch),
+    [token, watchLaterDispatch]
+  );
 
   const reversedVideos = watchLater.length > 0 ? [...watchLater].reverse() : "";
 

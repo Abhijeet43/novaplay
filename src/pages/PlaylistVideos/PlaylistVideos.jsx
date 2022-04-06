@@ -4,13 +4,9 @@ import { AppDrawer, MobileNav } from "../../components";
 import { LatestVideo } from "./components/LatestVideo/LatestVideo";
 import { VideoList } from "./components/VideoList/VideoList";
 import { useNavigate, useParams } from "react-router-dom";
-import { usePlaylist, useAuth } from "../../context";
+import { usePlaylist } from "../../context";
 
 const PlaylistVideos = () => {
-  const {
-    authState: { token },
-  } = useAuth();
-
   const {
     playlistState: { playlists },
   } = usePlaylist();
