@@ -17,7 +17,7 @@ const Liked = () => {
     authState: { token },
   } = useAuth();
 
-  useEffect(() => getLikesHandler(token, likeDispatch), []);
+  useEffect(() => getLikesHandler(token, likeDispatch), [token, likeDispatch]);
 
   const reversedLikes = likes.length > 0 ? [...likes].reverse() : "";
 

@@ -1,18 +1,30 @@
 import React from "react";
 import "./CategoryCard.css";
-import { Link } from "react-router-dom";
+import { useCategory } from "../../context/";
+import { useNavigate } from "react-router-dom";
 
 const CategoryCard = ({ category }) => {
-  const { _id, categoryName, image } = category;
+  const { categoryName, image } = category;
+
+  const { categoryDispatch } = useCategory();
+
+  const navigate = useNavigate();
+
+  const categoryHandler = () => {
+    categoryDispatch({ type: "SELECT_CATEGORY", payload: categoryName });
+    navigate("/explore");
+  };
   return (
     <div className="category-card">
       <div className="category-card-thumbnail">
         <img className="category-img" src={image} alt="category-skills" />
       </div>
       <div className="category-overlay">
-        <Link to={`/explore/${_id}`} className="category-overlay-text">
-          {categoryName}
-        </Link>
+        <div className="category-overlay-text">
+          <button onClick={categoryHandler} className="category-btn">
+            {categoryName}
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -70,7 +70,7 @@ const VideoCard = ({ video }) => {
       </div>
       <div className="video-card-body">
         <div className="video-card-icon">
-          <img src={logo} allt="channel-logo" />
+          <img src={logo} alt="channel-logo" />
         </div>
         <div className="video-card-text">
           <Link to={`/videoplay/${_id}`}>

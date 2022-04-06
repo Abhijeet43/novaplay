@@ -97,9 +97,9 @@ const Login = () => {
               <input type="checkbox" id="checkbox-remember" />
               <label htmlFor="checkbox-remember">Remember Me</label>
             </div>
-            <a href="#" className="form-link">
+            <Link to="/forgotpassword" className="form-link">
               Forgot Password?
-            </a>
+            </Link>
           </div>
           <div className="form-group">
             <button className="btn btn-primary" onClick={guestUserHandler}>

@@ -11,7 +11,7 @@ const PlaylistCard = ({ totalVideos, title, image, playlistId }) => {
   } = useAuth();
   return (
     <div className="playlist-card">
-      <img className="playlist-img" src={image} alt="playlist-image" />
+      <img className="playlist-img" src={image} alt="playlist" />
       <div className="overlay-count">
         {totalVideos}
         <svg width="3rem" height="3rem" viewBox="0 0 24 24">

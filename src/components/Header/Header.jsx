@@ -1,7 +1,7 @@
 import React from "react";
 import "./Header.css";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useAuth, useSearch } from "../../context/";
 
 const Header = () => {
   const {
@@ -9,7 +9,11 @@ const Header = () => {
     authDispatch,
   } = useAuth();
 
+  const { searchQuery, setSearchQuery } = useSearch();
+
   const navigate = useNavigate();
+
+  const location = useLocation();
 
   const checkStatus = (token) => {
     return token ? "Logout" : "Login";
@@ -34,16 +38,20 @@ const Header = () => {
             NOVAPLAY
           </Link>
         </div>
-        <div className="nav-search">
-          <button className="search-icon">
-            <i className="fas fa-search"></i>
-          </button>
-          <input
-            type="search"
-            className="nav-search"
-            placeholder="search items here"
-          />
-        </div>
+        {location.pathname === "/explore" && (
+          <div className="nav-search">
+            <button className="search-icon">
+              <i className="fas fa-search"></i>
+            </button>
+            <input
+              type="search"
+              className="nav-search"
+              placeholder="search items here"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+        )}
         <ul className="nav-items">
           <li className="nav-item">{token ? `Hi ${user.firstName}` : ""}</li>
           <li className="nav-item">

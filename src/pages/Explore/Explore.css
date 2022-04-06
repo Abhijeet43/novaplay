@@ -1,0 +1,11 @@
+.video-card-container .nav-search {
+  display: none;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 540px) {
+  .video-card-container .nav-search {
+    display: flex;
+    width: 90%;
+  }
+}

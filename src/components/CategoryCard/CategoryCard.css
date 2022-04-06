@@ -48,6 +48,12 @@
   transform: scale(1);
 }
 
+.category-btn {
+  color: var(--secondary-color);
+  font-size: var(--font-size-5);
+  white-space: nowrap;
+}
+
 /* MEDIA QUERIES */
 @media (max-width: 540px) {
   .category-card {

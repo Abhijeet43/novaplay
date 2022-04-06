@@ -6,6 +6,8 @@ export {
   getTrendingVideos,
   getVideo,
   getCategoryVideos,
+  getCategoryFilteredVideos,
+  getSearchFilteredVideos,
 } from "./videos";
 
 export {

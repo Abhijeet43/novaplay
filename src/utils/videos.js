@@ -48,6 +48,22 @@ const getVideo = (videoId, videos) =>
 const getCategoryVideos = (category, id, videos) =>
   videos.filter((video) => video._id !== id && video.category === category);
 
+const getCategoryFilteredVideos = (category, videos) => {
+  if (category) {
+    return videos.filter((video) => video.category === category);
+  }
+  return videos;
+};
+
+const getSearchFilteredVideos = (searchQuery, videos) => {
+  if (searchQuery === "") {
+    return videos;
+  }
+  return videos.filter((video) =>
+    video.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+};
+
 export {
   getVideos,
   getCategories,
@@ -56,4 +72,6 @@ export {
   getTrendingVideos,
   getVideo,
   getCategoryVideos,
+  getCategoryFilteredVideos,
+  getSearchFilteredVideos,
 };
