@@ -1,17 +1,43 @@
 import React from "react";
 import "./TopCategory.css";
-import { useVideo } from "../../../../context/";
+import { useVideo, useCategory } from "../../../../context/";
 
 const TopCategory = () => {
   const {
     videoState: { categories },
   } = useVideo();
+
+  const {
+    categoryState: { category },
+    categoryDispatch,
+  } = useCategory();
+
   return (
     <div className="categories-container">
-      <button className="btn btn-secondary">All</button>
+      <button
+        onClick={() =>
+          categoryDispatch({
+            type: "CLEAR_CATEGORY",
+          })
+        }
+        className={`btn  ${category === "" ? "btn-primary" : "btn-secondary"}`}
+      >
+        All
+      </button>
       {categories.map(({ categoryName, _id }) => {
         return (
-          <button key={_id} className="btn btn-secondary">
+          <button
+            onClick={() =>
+              categoryDispatch({
+                type: "SELECT_CATEGORY",
+                payload: categoryName,
+              })
+            }
+            key={_id}
+            className={`btn ${
+              category === categoryName ? "btn-primary" : "btn-secondary"
+            }`}
+          >
             {categoryName}
           </button>
         );
