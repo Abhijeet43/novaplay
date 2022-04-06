@@ -10,7 +10,7 @@ import { learning, lifeSkills, psychology, science, time } from "../../assets/";
 export const categories = [
   {
     _id: uuid(),
-    categoryName: "Learning",
+    categoryName: "learning",
     description:
       "Learning is the process of acquiring new understanding, knowledge, behaviors, skills, values, attitudes, and preferences.",
     isFeatured: true,
@@ -18,7 +18,7 @@ export const categories = [
   },
   {
     _id: uuid(),
-    categoryName: "Life-Skills",
+    categoryName: "life-skills",
     description:
       "Life skills are abilities for adaptive and positive behaviour that enable humans to deal effectively with the demands and challenges of life.",
     isFeatured: false,
@@ -26,7 +26,7 @@ export const categories = [
   },
   {
     _id: uuid(),
-    categoryName: "Time Management",
+    categoryName: "time-management",
     description:
       "Time management is the process of planning and exercising conscious control of time spent on specific activities, especially to increase effectiveness, efficiency, and productivity.",
     isFeatured: true,
@@ -34,14 +34,14 @@ export const categories = [
   },
   {
     _id: uuid(),
-    categoryName: "Psychology",
+    categoryName: "psychology",
     description: "Psychology is the scientific study of mind and behavior.",
     isFeatured: true,
     image: psychology,
   },
   {
     _id: uuid(),
-    categoryName: "Science",
+    categoryName: "science",
     description:
       "Science is a systematic enterprise that builds and organizes knowledge in the form of testable explanations and predictions.",
     isFeatured: false,
