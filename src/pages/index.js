@@ -9,3 +9,4 @@ export { Library } from "./Library/Library";
 export { PlaylistVideos } from "./PlaylistVideos/PlaylistVideos";
 export { WatchLater } from "./WatchLater/WatchLater";
 export { History } from "./History/History";
+export { Error404 } from "./Error404/Error404";
