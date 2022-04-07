@@ -46,7 +46,7 @@ const Signup = () => {
             user: response.data.createdUser,
           },
         });
-        toast.success("Sigup Success");
+        toast.success("Signup Successful!!");
         localStorage.setItem("token", response.data.encodedToken);
         localStorage.setItem("user", JSON.stringify(response.data.createdUser));
         navigate("/");
