@@ -2,17 +2,36 @@ import React, { useState } from "react";
 import "../authentication.css";
 import { loginService } from "../../../services/";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../../context/";
+import {
+  useAuth,
+  useLike,
+  useHistory,
+  usePlaylist,
+  useWatchLater,
+} from "../../../context/";
 import { useToggle } from "../../../hooks/useToggle";
 import { toast } from "react-toastify";
+import {
+  getLikesHandler,
+  getPlaylists,
+  getHistory,
+  getWatchLaterHandler,
+} from "../../../utils/";
 
 const Login = () => {
   const { authDispatch } = useAuth();
+  const { likeDispatch } = useLike();
+  const { historyDispatch } = useHistory();
+  const { playlistDispatch } = usePlaylist();
+  const { watchLaterDispatch } = useWatchLater();
+
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+
   const [showPass, setShowPass] = useToggle(false);
+
   const navigate = useNavigate();
 
   const guestUser = {
@@ -47,6 +66,10 @@ const Login = () => {
             user: response.data.foundUser,
           },
         });
+        getLikesHandler(response.data.encodedToken, likeDispatch);
+        getPlaylists(response.data.encodedToken, playlistDispatch);
+        getHistory(response.data.encodedToken, historyDispatch);
+        getWatchLaterHandler(response.data.encodedToken, watchLaterDispatch);
         toast.success(`Welcome Back ${response.data.foundUser.firstName}`);
         navigate("/");
       } else {

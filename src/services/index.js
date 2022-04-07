@@ -5,6 +5,7 @@ export { signUpService } from "./authServices/signup.services";
 export { addToLikesService } from "./likeServices/addToLikes.service";
 export { removeFromLikesService } from "./likeServices/removeFromLikes.service";
 export { getLikesService } from "./likeServices/getLikes.service";
+export { getPlaylistsService } from "./playlistServices/getPlaylists.service";
 export { createPlaylistService } from "./playlistServices/createPlaylist.service";
 export { addToPlaylistService } from "./playlistServices/addToPlaylist.service";
 export { removeFromPlaylistService } from "./playlistServices/removeFromPlaylist.service";
