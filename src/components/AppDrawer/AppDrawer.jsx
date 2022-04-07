@@ -1,10 +1,14 @@
 import React from "react";
 import "./AppDrawer.css";
 import { NavLink } from "react-router-dom";
+import { useCategory } from "../../context/";
 
 const AppDrawer = () => {
+  const { categoryDispatch } = useCategory();
+
   return (
     <section className="app-drawer">
+      {/* HOME */}
       <NavLink to="/" className="drawer-item">
         <div className="drawer-item-icon">
           <svg
@@ -25,7 +29,13 @@ const AppDrawer = () => {
         </div>
         <div className="drawer-item-text">Home</div>
       </NavLink>
-      <NavLink to="/explore" className="drawer-item">
+
+      {/* EXPLORE */}
+      <NavLink
+        to="/explore"
+        onClick={() => categoryDispatch({ type: "CLEAR_CATEGORY" })}
+        className="drawer-item"
+      >
         <div className="drawer-item-icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -45,6 +55,8 @@ const AppDrawer = () => {
         </div>
         <div>Explore</div>
       </NavLink>
+
+      {/* PLAYLIST */}
       <NavLink to="/playlist" className="drawer-item">
         <div className="drawer-item-icon">
           <svg
@@ -65,6 +77,8 @@ const AppDrawer = () => {
         </div>
         <div>Playlist</div>
       </NavLink>
+
+      {/* WATCH LATER */}
       <NavLink to="/watchlater" className="drawer-item">
         <div className="drawer-item-icon">
           <svg
@@ -85,6 +99,8 @@ const AppDrawer = () => {
         </div>
         <div>Watch Later</div>
       </NavLink>
+
+      {/* LIKED */}
       <NavLink to="/liked" className="drawer-item">
         <div className="drawer-item-icon">
           <svg
@@ -105,6 +121,8 @@ const AppDrawer = () => {
         </div>
         <div>Liked</div>
       </NavLink>
+
+      {/* HISTORY */}
       <NavLink to="/history" className="drawer-item">
         <div className="drawer-item-icon">
           <svg
