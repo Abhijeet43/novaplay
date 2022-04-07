@@ -4,6 +4,7 @@ import { loginService } from "../../../services/";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/";
 import { useToggle } from "../../../hooks/useToggle";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const { authDispatch } = useAuth();
@@ -46,20 +47,13 @@ const Login = () => {
             user: response.data.foundUser,
           },
         });
+        toast.success(`Welcome Back ${response.data.foundUser.firstName}`);
         navigate("/");
-      }
-
-      if (response.status === 404) {
-        throw new Error(
-          "The email entered is not Registered. Please Enter a valid Email"
-        );
-      } else if (response.status === 401) {
-        throw new Error("Incorrect Password! Please try again.");
-      } else if (response.status === 500) {
-        throw new Error("Internal Server Error");
+      } else {
+        throw new Error("Something Went Wrong!!... Try Again Later");
       }
     } catch (error) {
-      alert(error);
+      toast.error(error.response.data.errors[0]);
     }
   };
 

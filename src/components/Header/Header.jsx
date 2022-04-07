@@ -2,6 +2,7 @@ import React from "react";
 import "./Header.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth, useSearch } from "../../context/";
+import { toast } from "react-toastify";
 
 const Header = () => {
   const {
@@ -24,6 +25,7 @@ const Header = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     authDispatch({ type: "LOGOUT" });
+    toast.success("Logged Out Successfully");
   };
 
   const loginActionHandler = (type) => {

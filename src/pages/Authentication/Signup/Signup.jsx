@@ -5,6 +5,7 @@ import { useAuth } from "../../../context/";
 import { signUpService } from "../../../services/index";
 import { useNavigate } from "react-router-dom";
 import { useToggle } from "../../../hooks/useToggle";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       if (user.password !== user.confirmPassword) {
-        alert("Password and Confirm Password donot match");
+        toast.error("Password and Confirm Password donot match");
         return;
       }
       const response = await signUpService(user);
@@ -45,12 +46,13 @@ const Signup = () => {
             user: response.data.createdUser,
           },
         });
+        toast.success("Sigup Success");
         localStorage.setItem("token", response.data.encodedToken);
         localStorage.setItem("user", JSON.stringify(response.data.createdUser));
         navigate("/");
       }
     } catch (error) {
-      console.log("Error", error);
+      toast.error(error.response.data.errors[0]);
     }
   };
 
