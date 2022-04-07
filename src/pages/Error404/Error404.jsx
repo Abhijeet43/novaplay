@@ -1,5 +1,6 @@
 import React from "react";
 import "./Error404.css";
+import { Link } from "react-router-dom";
 
 const Error404 = () => {
   return (
@@ -155,6 +156,9 @@ const Error404 = () => {
           fill="#cacaca"
         />
       </svg>
+      <Link to="/" className="btn btn-primary">
+        Go Back To Home
+      </Link>
     </div>
   );
 };
