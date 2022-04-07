@@ -1,8 +1,11 @@
 .error-404-contianer {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .error-img {
-  width: 45rem;
-  height: 45rem;
+  width: 35rem;
+  height: 35rem;
 }
