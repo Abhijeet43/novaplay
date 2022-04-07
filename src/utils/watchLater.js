@@ -4,6 +4,8 @@ import {
   getWatchLaterService,
 } from "../services/";
 
+import { toast } from "react-toastify";
+
 const getWatchLaterHandler = async (token, watchLaterDispatch) => {
   try {
     const response = await getWatchLaterService(token);
@@ -16,7 +18,7 @@ const getWatchLaterHandler = async (token, watchLaterDispatch) => {
       throw new Error("Sorry! Something Went Wrong....Try Again Later");
     }
   } catch (error) {
-    alert(error);
+    toast.error(error.response.data.errors[0]);
   }
 };
 
@@ -28,11 +30,12 @@ const addToWatchLater = async (video, watchLaterDispatch, token) => {
         type: "ADD_TO_WATCHLATER",
         payload: response.data.watchlater,
       });
+      toast.info("Video Added To Watch Later");
     } else {
       throw new Error("Sorry!! Something went wrong!!");
     }
   } catch (error) {
-    alert(error);
+    toast.error(error.response.data.errors[0]);
   }
 };
 
@@ -44,11 +47,12 @@ const removeFromWatchLater = async (id, token, watchLaterDispatch) => {
         type: "REMOVE_FROM_WATCHLATER",
         payload: response.data.watchlater,
       });
+      toast.error("Video Removed From Watch Later");
     } else {
       throw new Error("Sorry!! Something went wrong!!");
     }
   } catch (error) {
-    alert(error);
+    toast.error(error.response.data.errors[0]);
   }
 };
 
@@ -66,6 +70,7 @@ const callAddToWatchLaterHandler = (
     const video = videos.find((video) => video._id === id);
     addToWatchLater(video, watchLaterDispatch, token);
   } else {
+    toast.warning("You are not logged in!!");
     navigate("/login");
   }
 };
@@ -78,15 +83,20 @@ const checkWatchLaterActionHandler = (
   navigate,
   videos
 ) => {
-  checkWatchLaterAction(id, watchLater)
-    ? removeFromWatchLater(id, token, watchLaterDispatch)
-    : callAddToWatchLaterHandler(
-        id,
-        token,
-        navigate,
-        videos,
-        watchLaterDispatch
-      );
+  if (token) {
+    checkWatchLaterAction(id, watchLater)
+      ? removeFromWatchLater(id, token, watchLaterDispatch)
+      : callAddToWatchLaterHandler(
+          id,
+          token,
+          navigate,
+          videos,
+          watchLaterDispatch
+        );
+  } else {
+    toast.warning("You are not logged in!!");
+    navigate("/login");
+  }
 };
 
 export {

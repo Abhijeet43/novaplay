@@ -5,6 +5,8 @@ import {
   deleteAllHistoryService,
 } from "../services/";
 
+import { toast } from "react-toastify";
+
 const getHistory = async (token, historyDispatch) => {
   try {
     const response = await getHistoryService(token);
@@ -17,7 +19,7 @@ const getHistory = async (token, historyDispatch) => {
       throw new Error("Sorry! Something Went Wrong....Try Again Later");
     }
   } catch (error) {
-    alert(error);
+    toast.error(error.response.data.errors[0]);
   }
 };
 
@@ -33,7 +35,7 @@ const addToHistory = async (video, historyDispatch, token) => {
       throw new Error("Sorry! Something Went Wrong....Try Again Later");
     }
   } catch (error) {
-    alert(error);
+    toast.error(error.response.data.errors[0]);
   }
 };
 
@@ -45,11 +47,12 @@ const removeFromHistory = async (id, token, historyDispatch) => {
         type: "REMOVE_FROM_HISTORY",
         payload: response.data.history,
       });
+      toast.error("Video Removed From Watch Later");
     } else {
       throw new Error("Sorry! Something Went Wrong....Try Again Later");
     }
   } catch (error) {
-    alert(error);
+    toast.error(error.response.data.errors[0]);
   }
 };
 
@@ -65,7 +68,7 @@ const deleteAllHistory = async (token, historyDispatch) => {
       throw new Error("Sorry! Something Went Wrong....Try Again Later");
     }
   } catch (error) {
-    alert(error);
+    toast.error(error.response.data.errors[0]);
   }
 };
 

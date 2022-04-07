@@ -1,13 +1,26 @@
 import React from "react";
 import "./Header.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useAuth, useSearch } from "../../context/";
+import {
+  useAuth,
+  useSearch,
+  useLike,
+  useHistory,
+  usePlaylist,
+  useWatchLater,
+} from "../../context/";
+import { toast } from "react-toastify";
 
 const Header = () => {
   const {
     authState: { token, user },
     authDispatch,
   } = useAuth();
+
+  const { likeDispatch } = useLike();
+  const { historyDispatch } = useHistory();
+  const { playlistDispatch } = usePlaylist();
+  const { watchLaterDispatch } = useWatchLater();
 
   const { searchQuery, setSearchQuery } = useSearch();
 
@@ -24,6 +37,11 @@ const Header = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     authDispatch({ type: "LOGOUT" });
+    likeDispatch({ type: "CLEAR_LIKES" });
+    playlistDispatch({ type: "CLEAR_PLAYLISTS" });
+    historyDispatch({ type: "CLEAR_HISTORY" });
+    watchLaterDispatch({ type: "CLEAR_WATCHLATER" });
+    toast.success("Logged Out Successfully");
   };
 
   const loginActionHandler = (type) => {

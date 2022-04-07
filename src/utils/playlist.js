@@ -3,7 +3,29 @@ import {
   addToPlaylistService,
   removeFromPlaylistService,
   deletePlaylistService,
+  getPlaylistsService,
 } from "../services";
+
+import { toast } from "react-toastify";
+
+const getPlaylists = async (token, playlistsDispatch) => {
+  if (token) {
+    try {
+      const response = await getPlaylistsService(token);
+      if (response.status === 200) {
+        playlistsDispatch({
+          type: "GET_PLAYLISTS",
+          payload: response.data.playlists,
+        });
+        return response.data.playlists;
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      alert(error);
+    }
+  }
+};
 
 const createPlaylist = async (requestBody, token, playlistDispatch) => {
   try {
@@ -17,7 +39,7 @@ const createPlaylist = async (requestBody, token, playlistDispatch) => {
       throw new Error("Sorry!! Something went wrong!!");
     }
   } catch (error) {
-    alert(error);
+    toast.error(error.response.data.errors[0]);
   }
 };
 
@@ -34,11 +56,12 @@ const addToPlaylist = async ({
         type: "ADD_TO_PLAYLIST",
         payload: response.data.playlist,
       });
+      toast.info("Video Added To Playlist");
     } else {
       throw new Error("Sorry!! Something went wrong!!");
     }
   } catch (error) {
-    alert(error);
+    toast.error(error.response.data.errors[0]);
   }
 };
 
@@ -60,11 +83,12 @@ const removeFromPlaylist = async ({
         type: "REMOVE_FROM_PLAYLIST",
         payload: response.data.playlist,
       });
+      toast.error("Video Removed From Playlist");
     } else {
       throw new Error("Sorry!! Something went wrong!!");
     }
   } catch (error) {
-    alert(error);
+    toast.error(error.response.data.errors[0]);
   }
 };
 
@@ -76,11 +100,12 @@ const deletePlaylist = async (token, playlistId, playlistDispatch) => {
         type: "UPDATE_PLAYLIST",
         payload: response.data.playlists,
       });
+      toast.error("Playlist Deleted");
     } else {
       throw new Error("Sorry!! Something went wrong!!");
     }
   } catch (error) {
-    alert(error);
+    toast.error(error.response.data.errors[0]);
   }
 };
 
@@ -95,4 +120,5 @@ export {
   removeFromPlaylist,
   deletePlaylist,
   isVideoInPlaylist,
+  getPlaylists,
 };

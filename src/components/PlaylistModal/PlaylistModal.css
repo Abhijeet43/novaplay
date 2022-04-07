@@ -32,6 +32,9 @@
 .playlist-modal-body {
   max-height: 15rem;
   overflow-y: scroll;
+  color: var(--lynx-gray-color);
+  font-size: var(--font-size-5);
+  text-align: center;
 }
 
 .playlist-modal-title {

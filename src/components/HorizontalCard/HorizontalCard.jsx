@@ -109,7 +109,12 @@ const HorizontalCard = ({
     >
       <Link to={`/videoPlay/${_id}`}>
         <div className="horizontal-video-img-container">
-          <img className="horizontal-video-img" src={image} alt="video-img" />
+          <img
+            className="horizontal-video-img"
+            src={image}
+            alt="video-img"
+            loading="lazy"
+          />
           <div className="video-time">{time}</div>
         </div>
       </Link>
@@ -183,22 +188,16 @@ const HorizontalCard = ({
               >
                 <div className="video-actions-icon">
                   <i
-                    className={
-                      token
-                        ? `${
-                            checkWatchLaterAction(_id, watchLater)
-                              ? "fa-solid"
-                              : "fa-regular"
-                          } fa-bookmark`
-                        : "fa-regular fa-bookmark"
-                    }
+                    className={`${
+                      checkWatchLaterAction(_id, watchLater)
+                        ? "fa-solid"
+                        : "fa-regular"
+                    } fa-bookmark`}
                   ></i>
                 </div>
                 <div>
-                  {token
-                    ? checkWatchLaterAction(_id, watchLater)
-                      ? "Remove From Watch Later"
-                      : "Add To Watch Later"
+                  {checkWatchLaterAction(_id, watchLater)
+                    ? "Remove From Watch Later"
                     : "Add To Watch Later"}
                 </div>
               </div>

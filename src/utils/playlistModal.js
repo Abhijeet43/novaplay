@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 const openModal = ({ token, playlistModalDispatch, video, navigate }) => {
   if (token) {
     playlistModalDispatch({
@@ -5,6 +7,7 @@ const openModal = ({ token, playlistModalDispatch, video, navigate }) => {
       payload: { isActive: true, video },
     });
   } else {
+    toast.warning("You are not logged in!!");
     navigate("/login");
   }
 };

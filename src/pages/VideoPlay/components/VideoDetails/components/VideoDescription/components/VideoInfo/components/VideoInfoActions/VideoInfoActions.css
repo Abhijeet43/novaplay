@@ -11,6 +11,10 @@
   white-space: nowrap;
 }
 
+.video-action-btn:hover {
+  color: var(--primary-color);
+}
+
 .action-icon {
   margin-right: 0.3rem;
 }

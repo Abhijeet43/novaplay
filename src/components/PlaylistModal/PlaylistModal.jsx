@@ -77,12 +77,6 @@ const PlaylistModal = () => {
         </header>
         <hr />
         <section className="playlist-modal-body">
-          <div className="input-group">
-            <input disabled type="checkbox" id="checkbox-1" />
-            <label className="playlist-modal-label" htmlFor="checkbox-1">
-              Watch Later
-            </label>
-          </div>
           {playlists.length > 0
             ? playlists.map((playlist) => {
                 return (
@@ -106,7 +100,7 @@ const PlaylistModal = () => {
                   </div>
                 );
               })
-            : null}
+            : "No Playlist To Show"}
         </section>
         <hr />
         <footer className="playlist-modal-footer">

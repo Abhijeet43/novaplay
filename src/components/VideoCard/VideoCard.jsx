@@ -70,7 +70,7 @@ const VideoCard = ({ video }) => {
       </div>
       <div className="video-card-body">
         <div className="video-card-icon">
-          <img src={logo} alt="channel-logo" />
+          <img src={logo} alt="channel-logo" loading="lazy" />
         </div>
         <div className="video-card-text">
           <Link to={`/videoplay/${_id}`}>
@@ -128,23 +128,16 @@ const VideoCard = ({ video }) => {
             >
               <div className="video-actions-icon">
                 <i
-                  className={
-                    token
-                      ? `${
-                          checkWatchLaterAction(_id, watchLater)
-                            ? "fa-solid"
-                            : "fa-regular"
-                        } fa-bookmark`
-                      : "fa-regular fa-bookmark"
-                  }
+                  className={`${
+                    checkWatchLaterAction(_id, watchLater)
+                      ? "fa-solid"
+                      : "fa-regular"
+                  } fa-bookmark`}
                 ></i>
               </div>
               <div>
-                {" "}
-                {token
-                  ? checkWatchLaterAction(_id, watchLater)
-                    ? "Remove From Watch Later"
-                    : "Add To Watch Later"
+                {checkWatchLaterAction(_id, watchLater)
+                  ? "Remove From Watch Later"
                   : "Add To Watch Later"}
               </div>
             </div>

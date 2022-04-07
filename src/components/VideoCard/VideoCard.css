@@ -130,8 +130,8 @@
   transition: transform 0.2s ease-in;
 }
 
-.video-actions-menu.active{
-  transform:scale(1);
+.video-actions-menu.active {
+  transform: scale(1);
 }
 
 .video-actions-item {
@@ -140,6 +140,7 @@
   width: 18rem;
   padding: 0.3rem;
   transition: all 0.3s ease;
+  color: var(--primary-color);
 }
 
 .video-actions-item:hover {
