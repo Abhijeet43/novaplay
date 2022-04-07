@@ -16,7 +16,6 @@ import {
   checkWatchLaterAction,
   checkWatchLaterActionHandler,
 } from "../../utils/";
-import { toast } from "react-toastify";
 
 const VideoCard = ({ video }) => {
   const [showMenu, setShowMenu] = useToggle(false);
@@ -71,7 +70,7 @@ const VideoCard = ({ video }) => {
       </div>
       <div className="video-card-body">
         <div className="video-card-icon">
-          <img src={logo} alt="channel-logo" />
+          <img src={logo} alt="channel-logo" loading="lazy" />
         </div>
         <div className="video-card-text">
           <Link to={`/videoplay/${_id}`}>

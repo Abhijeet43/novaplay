@@ -17,7 +17,12 @@ const CategoryCard = ({ category }) => {
   return (
     <div className="category-card">
       <div className="category-card-thumbnail">
-        <img className="category-img" src={image} alt="category-skills" />
+        <img
+          className="category-img"
+          src={image}
+          alt="category-skills"
+          loading="lazy"
+        />
       </div>
       <div className="category-overlay">
         <div className="category-overlay-text">

@@ -109,7 +109,12 @@ const HorizontalCard = ({
     >
       <Link to={`/videoPlay/${_id}`}>
         <div className="horizontal-video-img-container">
-          <img className="horizontal-video-img" src={image} alt="video-img" />
+          <img
+            className="horizontal-video-img"
+            src={image}
+            alt="video-img"
+            loading="lazy"
+          />
           <div className="video-time">{time}</div>
         </div>
       </Link>
