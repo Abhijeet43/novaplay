@@ -31,7 +31,6 @@ const addToHistory = async (video, historyDispatch, token) => {
         type: "ADD_TO_HISTORY",
         payload: response.data.history,
       });
-      toast.info("Video Added To Watch Later");
     } else {
       throw new Error("Sorry! Something Went Wrong....Try Again Later");
     }
