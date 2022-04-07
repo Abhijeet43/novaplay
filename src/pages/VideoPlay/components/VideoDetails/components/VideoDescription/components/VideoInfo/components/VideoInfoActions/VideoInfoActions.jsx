@@ -50,9 +50,13 @@ const VideoInfoActions = ({ id, likes: channelLikes }) => {
         }
       >
         <i
-          className={`${
-            checkLikesAction(id, likes) ? "fa-solid" : "fa-regular"
-          } fa-thumbs-up action-icon`}
+          className={
+            token
+              ? `${
+                  checkLikesAction(id, likes) ? "fa-solid" : "fa-regular"
+                } fa-thumbs-up action-icon`
+              : "fa-regular fa-thumbs-up action-icon"
+          }
         ></i>
         {channelLikes}
       </button>

@@ -67,9 +67,14 @@ const likesActionHandler = (
   videos,
   likes
 ) => {
-  checkLikesAction(id, likes)
-    ? removeFromLikesHandler(id, token, likeDispatch)
-    : callAddToLikesHandler(id, token, videos, navigate, likeDispatch);
+  if (token) {
+    checkLikesAction(id, likes)
+      ? removeFromLikesHandler(id, token, likeDispatch)
+      : callAddToLikesHandler(id, token, videos, navigate, likeDispatch);
+  } else {
+    toast.warning('You are not logged in!!');
+    navigate('/login');
+  }
 };
 
 export {

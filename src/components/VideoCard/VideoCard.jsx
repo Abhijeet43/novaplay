@@ -163,14 +163,22 @@ const VideoCard = ({ video }) => {
             >
               <div className="video-actions-icon">
                 <i
-                  className={`${
-                    checkLikesAction(_id, likes) ? "fa-solid" : "fa-regular"
-                  } fa-thumbs-up`}
+                  className={
+                    token
+                      ? `${
+                          checkLikesAction(_id, likes)
+                            ? "fa-solid"
+                            : "fa-regular"
+                        } fa-thumbs-up`
+                      : "fa-regular fa-thumbs-up"
+                  }
                 ></i>
               </div>
               <div>
-                {checkLikesAction(_id, likes)
-                  ? "Remove From Likes"
+                {token
+                  ? checkLikesAction(_id, likes)
+                    ? "Remove From Likes"
+                    : "Like Video"
                   : "Like Video"}
               </div>
             </div>

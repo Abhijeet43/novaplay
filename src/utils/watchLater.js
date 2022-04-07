@@ -4,7 +4,7 @@ import {
   getWatchLaterService,
 } from "../services/";
 
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const getWatchLaterHandler = async (token, watchLaterDispatch) => {
   try {
@@ -70,7 +70,7 @@ const callAddToWatchLaterHandler = (
     const video = videos.find((video) => video._id === id);
     addToWatchLater(video, watchLaterDispatch, token);
   } else {
-    toast.warning('You are not logged in!!');
+    toast.warning("You are not logged in!!");
     navigate("/login");
   }
 };
@@ -83,15 +83,20 @@ const checkWatchLaterActionHandler = (
   navigate,
   videos
 ) => {
-  checkWatchLaterAction(id, watchLater)
-    ? removeFromWatchLater(id, token, watchLaterDispatch)
-    : callAddToWatchLaterHandler(
-        id,
-        token,
-        navigate,
-        videos,
-        watchLaterDispatch
-      );
+  if (token) {
+    checkWatchLaterAction(id, watchLater)
+      ? removeFromWatchLater(id, token, watchLaterDispatch)
+      : callAddToWatchLaterHandler(
+          id,
+          token,
+          navigate,
+          videos,
+          watchLaterDispatch
+        );
+  } else {
+    toast.warning("You are not logged in!!");
+    navigate("/login");
+  }
 };
 
 export {
