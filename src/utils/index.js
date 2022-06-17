@@ -44,3 +44,5 @@ export {
   removeFromHistory,
   deleteAllHistory,
 } from "./history";
+
+export { validateEmail, validatePassword, confirmPasswordCheck } from "./auth";
