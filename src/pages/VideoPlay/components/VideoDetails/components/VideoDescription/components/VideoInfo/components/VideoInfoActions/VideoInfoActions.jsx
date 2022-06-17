@@ -114,7 +114,6 @@ const VideoInfoActions = ({ id, likes: channelLikes }) => {
         </svg>
         Save
       </button>
-      <button className="video-action-btn">Share</button>
     </div>
   );
 };

@@ -43,27 +43,12 @@ const getPlaylist = async (token, playlistId, setPlaylist) => {
   }
 };
 
-const createPlaylist = async (requestBody, token, playlistDispatch) => {
-  try {
-    const response = await createPlaylistService(requestBody, token);
-    if (response.status === 201) {
-      playlistDispatch({
-        type: "UPDATE_PLAYLIST",
-        payload: response.data.playlists,
-      });
-    } else {
-      throw new Error("Sorry!! Something went wrong!!");
-    }
-  } catch (error) {
-    toast.error(error.response.data.errors[0]);
-  }
-};
-
 const addToPlaylist = async ({
   token,
   video,
   playlistId,
   playlistDispatch,
+  type = "default",
 }) => {
   try {
     const response = await addToPlaylistService(playlistId, video, token);
@@ -72,7 +57,9 @@ const addToPlaylist = async ({
         type: "ADD_TO_PLAYLIST",
         payload: response.data.playlist,
       });
-      toast.info("Video Added To Playlist");
+      if (type === "default") {
+        toast.info("Video Added To Playlist");
+      }
     } else {
       throw new Error("Sorry!! Something went wrong!!");
     }
@@ -128,6 +115,34 @@ const deletePlaylist = async (token, playlistId, playlistDispatch) => {
 const isVideoInPlaylist = (playlistId, videoId, playlists) => {
   const playlist = playlists.find((playlist) => playlist._id === playlistId);
   return playlist.videos.some((video) => video._id === videoId);
+};
+
+const createPlaylist = async (requestBody, token, playlistDispatch, video) => {
+  try {
+    const response = await createPlaylistService(requestBody, token);
+    if (response.status === 201) {
+      playlistDispatch({
+        type: "UPDATE_PLAYLIST",
+        payload: response.data.playlists,
+      });
+      const playlists = await getPlaylists(token, playlistDispatch);
+      const newPlaylist = playlists.find(
+        (playlist) => playlist.title === requestBody.playlist.title
+      );
+      addToPlaylist({
+        token,
+        video,
+        playlistId: newPlaylist._id,
+        playlistDispatch,
+        type: "newPlaylist",
+      });
+      toast.info("Playlist Created and Video Added Successfully!");
+    } else {
+      throw new Error("Sorry!! Something went wrong!!");
+    }
+  } catch (error) {
+    toast.error(error.response.data.errors[0]);
+  }
 };
 
 export {
