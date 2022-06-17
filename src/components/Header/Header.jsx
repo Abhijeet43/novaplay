@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./Header.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import {
   useAuth,
-  useSearch,
   useLike,
   useHistory,
   usePlaylist,
   useWatchLater,
 } from "../../context/";
 import { toast } from "react-toastify";
+import { getVideos } from "../../utils/";
 
 const Header = () => {
   const {
@@ -17,12 +17,18 @@ const Header = () => {
     authDispatch,
   } = useAuth();
 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [videos, setVideos] = useState([]);
+  const [searchedVideos, setSearchedVideos] = useState([]);
+  const [showSearchResult, setShowSearchResult] = useState(false);
+  const [isDebouncing, setIsDebouncing] = useState(false);
+  const timerRef = useRef();
+  const searchBarRef = useRef();
+
   const { likeDispatch } = useLike();
   const { historyDispatch } = useHistory();
   const { playlistDispatch } = usePlaylist();
   const { watchLaterDispatch } = useWatchLater();
-
-  const { searchQuery, setSearchQuery } = useSearch();
 
   const navigate = useNavigate();
 
@@ -48,6 +54,41 @@ const Header = () => {
     type === "Login" ? navigate("/login") : logoutHandler();
   };
 
+  useEffect(() => {
+    clearTimeout(timerRef.current);
+    setIsDebouncing(false);
+    timerRef.current = setTimeout(() => {
+      const availableVideos = videos.filter(
+        (video) =>
+          searchQuery.length !== 0 &&
+          video.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setSearchedVideos(availableVideos);
+      setIsDebouncing(true);
+    }, 300);
+  }, [searchQuery, videos]);
+
+  const navigateHandler = (videoId) => {
+    navigate(`videoplay/${videoId}`);
+    setSearchQuery("");
+  };
+
+  const closeSearchBar = (e) => {
+    if (!searchBarRef.current?.contains(e.target)) {
+      setShowSearchResult(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", closeSearchBar);
+
+    return () => {
+      document.removeEventListener("click", closeSearchBar);
+    };
+  }, []);
+
+  useEffect(() => getVideos("", setVideos), []);
+
   return (
     <header>
       <nav className="navbar">
@@ -57,17 +98,35 @@ const Header = () => {
           </Link>
         </div>
         {location.pathname === "/explore" && (
-          <div className="nav-search">
+          <div className="nav-search" ref={searchBarRef}>
             <button className="search-icon">
               <i className="fas fa-search"></i>
             </button>
             <input
               type="search"
-              className="nav-search"
+              className="search-input"
               placeholder="search items here"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              onFocus={() => setShowSearchResult(true)}
             />
+            {showSearchResult && isDebouncing && searchQuery ? (
+              <div className="search-results">
+                {searchedVideos.length > 0 ? (
+                  searchedVideos.map((video) => (
+                    <div
+                      key={video._id}
+                      className="searched-video"
+                      onClick={() => navigateHandler(video._id)}
+                    >
+                      {video.title}
+                    </div>
+                  ))
+                ) : (
+                  <p className="not-found-text">No result found</p>
+                )}
+              </div>
+            ) : null}
           </div>
         )}
         <ul className="nav-items">

@@ -6,14 +6,19 @@ import {
 
 import { toast } from "react-toastify";
 
-const getVideos = async (videoDispatch) => {
+const getVideos = async (videoDispatch = "", setVideos = "") => {
   try {
     const response = await getVideosService();
     if (response.status === 200) {
-      videoDispatch({
-        type: "LOAD_VIDEOS",
-        payload: response.data.videos,
-      });
+      if (videoDispatch !== "") {
+        videoDispatch({
+          type: "LOAD_VIDEOS",
+          payload: response.data.videos,
+        });
+      }
+      if (setVideos !== "") {
+        setVideos(response.data.videos);
+      }
     } else {
       throw new Error("Something Went Wrong.. Try Again Later");
     }
@@ -73,15 +78,6 @@ const getCategoryFilteredVideos = (category, videos) => {
   return videos;
 };
 
-const getSearchFilteredVideos = (searchQuery, videos) => {
-  if (searchQuery === "") {
-    return videos;
-  }
-  return videos.filter((video) =>
-    video.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-};
-
 export {
   getVideos,
   getCategories,
@@ -91,5 +87,4 @@ export {
   getVideo,
   getCategoryVideos,
   getCategoryFilteredVideos,
-  getSearchFilteredVideos,
 };
