@@ -1,17 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./VideoPlay.css";
 import { AppDrawer, MobileNav, PlaylistModal } from "../../components/";
 import { Video } from "./components/Video/Video";
 import { VideoDetails } from "./components/VideoDetails/VideoDetails";
-import { useParams } from "react-router-dom";
-import { useVideo, useHistory, useAuth } from "../../context/";
-import { getVideo, addToHistory } from "../../utils/";
+import { useParams, useNavigate } from "react-router-dom";
+import { useHistory, useAuth } from "../../context/";
+import { getVideo, addToHistory, removeFromHistory } from "../../utils/";
 
 const VideoPlay = () => {
-  const {
-    videoState: { videos },
-  } = useVideo();
-
   const {
     authState: { token },
   } = useAuth();
@@ -23,26 +19,26 @@ const VideoPlay = () => {
 
   const { videoId } = useParams();
 
-  const videoDetails = getVideo(videoId, videos);
+  const navigate = useNavigate();
+
+  const [videoDetails, setVideoDetails] = useState(null);
+
+  const callAddToHistoryHandler = () => {
+    if (token) {
+      if (!history.some((item) => item._id === videoId)) {
+        addToHistory(videoDetails, historyDispatch, token);
+      } else {
+        removeFromHistory(videoDetails._id, token, historyDispatch);
+        addToHistory(videoDetails, historyDispatch, token);
+      }
+    }
+  };
 
   useEffect(() => {
-    if (token && !history.some((video) => video._id === videoId)) {
-      addToHistory(videoDetails, historyDispatch, token);
-    }
-  }, [history, historyDispatch, token, videoDetails, videoId]);
+    getVideo(videoId, setVideoDetails, navigate);
+  }, [videoId, navigate]);
 
-  const {
-    _id,
-    youtubeId,
-    title,
-    views,
-    likes,
-    channelLogo: logo,
-    channelName: name,
-    subscribers,
-    description,
-    category,
-  } = videoDetails;
+  console.log(videoDetails);
 
   return (
     <main className="main-section">
@@ -51,18 +47,27 @@ const VideoPlay = () => {
       <PlaylistModal />
       <section className="videos-section">
         <div className="single-video-container">
-          <Video youtubeId={youtubeId} />
-          <VideoDetails
-            id={_id}
-            title={title}
-            views={views}
-            likes={likes}
-            logo={logo}
-            name={name}
-            subscribers={subscribers}
-            description={description}
-            category={category}
-          />
+          {videoDetails ? (
+            <>
+              <Video
+                callAddToHistoryHandler={callAddToHistoryHandler}
+                youtubeId={videoDetails.youtubeId}
+              />
+            </>
+          ) : null}
+          {videoDetails !== null ? (
+            <VideoDetails
+              id={videoDetails._id}
+              title={videoDetails.title}
+              views={videoDetails.views}
+              likes={videoDetails.likes}
+              logo={videoDetails.channelLogo}
+              name={videoDetails.name}
+              subscribers={videoDetails.subscribers}
+              description={videoDetails.description}
+              category={videoDetails.category}
+            />
+          ) : null}
         </div>
       </section>
     </main>

@@ -26,6 +26,7 @@ export {
   deletePlaylist,
   isVideoInPlaylist,
   getPlaylists,
+  getPlaylist,
 } from "./playlist";
 
 export { openModal } from "./playlistModal";

@@ -1,4 +1,10 @@
-import { getVideosService, getCategoriesService } from "../services/";
+import {
+  getVideosService,
+  getCategoriesService,
+  getSingleVideoService,
+} from "../services/";
+
+import { toast } from "react-toastify";
 
 const getVideos = async (videoDispatch) => {
   try {
@@ -12,7 +18,7 @@ const getVideos = async (videoDispatch) => {
       throw new Error("Something Went Wrong.. Try Again Later");
     }
   } catch (error) {
-    console.log("Error", error);
+    toast.error("Error", error);
   }
   return videoDispatch;
 };
@@ -29,7 +35,7 @@ const getCategories = async (videoDispatch) => {
       throw new Error("Something Went Wrong.. Try Again Later");
     }
   } catch (error) {
-    console.log("Error", error);
+    toast.error("Error", error);
   }
 };
 
@@ -42,8 +48,20 @@ const getFeaturedCategories = (categories) =>
 const getTrendingVideos = (videos) =>
   videos.filter((video) => video.isTrending);
 
-const getVideo = (videoId, videos) =>
-  videos.find((video) => video._id === videoId);
+const getVideo = async (videoId, setVideoDetails, navigate) => {
+  try {
+    const response = await getSingleVideoService(videoId);
+    if (response.status === 200) {
+      setVideoDetails(response.data.video);
+      return response.data.video;
+    } else {
+      throw new Error("Something Went Wrong.. Try Again Later");
+    }
+  } catch (error) {
+    toast.error(error);
+    navigate("*");
+  }
+};
 
 const getCategoryVideos = (category, id, videos) =>
   videos.filter((video) => video._id !== id && video.category === category);

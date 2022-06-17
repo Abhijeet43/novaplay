@@ -4,6 +4,7 @@ import {
   removeFromPlaylistService,
   deletePlaylistService,
   getPlaylistsService,
+  getPlaylistService,
 } from "../services";
 
 import { toast } from "react-toastify";
@@ -18,6 +19,21 @@ const getPlaylists = async (token, playlistsDispatch) => {
           payload: response.data.playlists,
         });
         return response.data.playlists;
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      alert(error);
+    }
+  }
+};
+
+const getPlaylist = async (token, playlistId, setPlaylist) => {
+  if (token) {
+    try {
+      const response = await getPlaylistService(token, playlistId);
+      if (response.status === 200) {
+        setPlaylist(response.data.playlist);
       } else {
         throw new Error();
       }
@@ -121,4 +137,5 @@ export {
   deletePlaylist,
   isVideoInPlaylist,
   getPlaylists,
+  getPlaylist,
 };
