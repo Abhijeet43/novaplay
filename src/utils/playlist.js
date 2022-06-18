@@ -28,8 +28,9 @@ const getPlaylists = async (token, playlistsDispatch) => {
   }
 };
 
-const getPlaylist = async (token, playlistId, setPlaylist) => {
+const getPlaylist = async (token, playlistId, setPlaylist, setLoader) => {
   if (token) {
+    setLoader(true);
     try {
       const response = await getPlaylistService(token, playlistId);
       if (response.status === 200) {
@@ -39,6 +40,8 @@ const getPlaylist = async (token, playlistId, setPlaylist) => {
       }
     } catch (error) {
       alert(error);
+    } finally {
+      setLoader(false);
     }
   }
 };

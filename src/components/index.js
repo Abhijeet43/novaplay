@@ -6,3 +6,4 @@ export { VideoCard } from "./VideoCard/VideoCard";
 export { HorizontalCard } from "./HorizontalCard/HorizontalCard";
 export { MobileNav } from "./MobileNav/MobileNav";
 export { PlaylistModal } from "./PlaylistModal/PlaylistModal";
+export { Loader } from "./Loader/Loader";

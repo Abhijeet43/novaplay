@@ -2,6 +2,8 @@ import React, { useEffect, useReducer, createContext, useContext } from "react";
 import { videoReducer } from "../reducers/video-reducer";
 import { getVideos, getCategories } from "../utils/";
 
+import { useLoader } from "../context/";
+
 const VideoContext = createContext({
   videoState: {},
   videoDispatch: () => {},
@@ -13,10 +15,12 @@ const VideoProvider = ({ children }) => {
     categories: [],
   });
 
+  const { setLoader } = useLoader();
+
   useEffect(() => {
-    getVideos(videoDispatch);
-    getCategories(videoDispatch);
-  }, []);
+    getVideos(videoDispatch, setLoader);
+    getCategories(videoDispatch, setLoader);
+  }, [setLoader]);
 
   return (
     <VideoContext.Provider value={{ videoState, videoDispatch }}>

@@ -4,7 +4,7 @@ import { AppDrawer, MobileNav, PlaylistModal } from "../../components/";
 import { Video } from "./components/Video/Video";
 import { VideoDetails } from "./components/VideoDetails/VideoDetails";
 import { useParams, useNavigate } from "react-router-dom";
-import { useHistory, useAuth } from "../../context/";
+import { useHistory, useAuth, useLoader } from "../../context/";
 import { getVideo, addToHistory, removeFromHistory } from "../../utils/";
 
 const VideoPlay = () => {
@@ -16,6 +16,8 @@ const VideoPlay = () => {
     historyState: { history },
     historyDispatch,
   } = useHistory();
+
+  const { setLoader } = useLoader();
 
   const { videoId } = useParams();
 
@@ -35,10 +37,8 @@ const VideoPlay = () => {
   };
 
   useEffect(() => {
-    getVideo(videoId, setVideoDetails, navigate);
-  }, [videoId, navigate]);
-
-  console.log(videoDetails);
+    getVideo(videoId, setVideoDetails, navigate, setLoader);
+  }, [videoId, navigate, setLoader]);
 
   return (
     <main className="main-section">

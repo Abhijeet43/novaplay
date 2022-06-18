@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../authentication.css";
 import { loginService } from "../../../services/";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useLoader } from "../../../context/";
 import {
   useAuth,
   useLike,
@@ -25,6 +26,7 @@ const Login = () => {
   const { historyDispatch } = useHistory();
   const { playlistDispatch } = usePlaylist();
   const { watchLaterDispatch } = useWatchLater();
+  const { setLoader } = useLoader();
 
   const location = useLocation();
 
@@ -65,6 +67,7 @@ const Login = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
+      setLoader(true);
       if (validateEmail(user.email)) {
         const response = await loginService(user);
         if (response.status === 200) {
@@ -94,6 +97,8 @@ const Login = () => {
       }
     } catch (error) {
       toast.error(error.response.data.errors[0]);
+    } finally {
+      setLoader(false);
     }
   };
 

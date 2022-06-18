@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../authentication.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../../context/";
+import { useAuth, useLoader } from "../../../context/";
 import { signUpService } from "../../../services/index";
 import { useToggle } from "../../../hooks/useToggle";
 import { toast } from "react-toastify";
@@ -17,6 +17,8 @@ const Signup = () => {
     authState: { token },
     authDispatch,
   } = useAuth();
+
+  const { setLoader } = useLoader();
 
   const [showPass, setShowPass] = useToggle(false);
   const [showConfirmPass, setShowConfirmPass] = useToggle(false);
@@ -44,6 +46,7 @@ const Signup = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
+      setLoader(true);
       if (
         validateEmail(user.email) &&
         validatePassword(user.password) &&
@@ -64,6 +67,8 @@ const Signup = () => {
       }
     } catch (error) {
       toast.error(error.response.data.errors[0]);
+    } finally {
+      setLoader(false);
     }
   };
 

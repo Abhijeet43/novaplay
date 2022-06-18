@@ -6,8 +6,15 @@ import {
 
 import { toast } from "react-toastify";
 
-const getVideos = async (videoDispatch = "", setVideos = "") => {
+const getVideos = async (
+  videoDispatch = "",
+  setVideos = "",
+  setLoader = ""
+) => {
   try {
+    if (setLoader !== "") {
+      setLoader(true);
+    }
     const response = await getVideosService();
     if (response.status === 200) {
       if (videoDispatch !== "") {
@@ -15,6 +22,9 @@ const getVideos = async (videoDispatch = "", setVideos = "") => {
           type: "LOAD_VIDEOS",
           payload: response.data.videos,
         });
+      }
+      if (setLoader !== "") {
+        setLoader(false);
       }
       if (setVideos !== "") {
         setVideos(response.data.videos);
@@ -28,8 +38,9 @@ const getVideos = async (videoDispatch = "", setVideos = "") => {
   return videoDispatch;
 };
 
-const getCategories = async (videoDispatch) => {
+const getCategories = async (videoDispatch, setLoader) => {
   try {
+    setLoader(true);
     const response = await getCategoriesService();
     if (response.status === 200) {
       videoDispatch({
@@ -41,6 +52,8 @@ const getCategories = async (videoDispatch) => {
     }
   } catch (error) {
     toast.error("Error", error);
+  } finally {
+    setLoader(false);
   }
 };
 
@@ -53,11 +66,13 @@ const getFeaturedCategories = (categories) =>
 const getTrendingVideos = (videos) =>
   videos.filter((video) => video.isTrending);
 
-const getVideo = async (videoId, setVideoDetails, navigate) => {
+const getVideo = async (videoId, setVideoDetails, navigate, setLoader) => {
+  setLoader(true);
   try {
     const response = await getSingleVideoService(videoId);
     if (response.status === 200) {
       setVideoDetails(response.data.video);
+      setLoader(false);
       return response.data.video;
     } else {
       throw new Error("Something Went Wrong.. Try Again Later");

@@ -4,13 +4,15 @@ import { AppDrawer, MobileNav } from "../../components";
 import { LatestVideo } from "./components/LatestVideo/LatestVideo";
 import { VideoList } from "./components/VideoList/VideoList";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAuth } from "../../context";
+import { useAuth, useLoader } from "../../context";
 import { getPlaylist } from "../../utils/";
 
 const PlaylistVideos = () => {
   const {
     authState: { token },
   } = useAuth();
+
+  const { setLoader } = useLoader();
 
   const [playlist, setPlaylist] = useState(null);
 
@@ -25,8 +27,8 @@ const PlaylistVideos = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getPlaylist(token, playlistId, setPlaylist);
-  }, [playlistId, token]);
+    getPlaylist(token, playlistId, setPlaylist, setLoader);
+  }, [playlistId, token, setLoader]);
 
   return (
     <main className="main-section">

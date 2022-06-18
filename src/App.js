@@ -20,9 +20,15 @@ import {
   Error404,
 } from "./pages/";
 
+import { Loader } from "./components/";
+
+import { useLoader } from "./context/";
+
 const App = () => {
+  const { loader } = useLoader();
   return (
     <>
+      {loader ? <Loader /> : null}
       <ToastContainer
         position="top-right"
         autoClose={3000}
