@@ -41,7 +41,9 @@ const PlaylistModal = () => {
       !playlists.some((playlist) => playlist.title === newPlaylist.title)
     ) {
       setOpenCreatePlaylist(false);
-      createPlaylist({ playlist: newPlaylist }, token, playlistDispatch);
+      createPlaylist({ playlist: newPlaylist }, token, playlistDispatch, video);
+      setOpenCreatePlaylist(false);
+      playlistModalDispatch({ type: "CLOSE_MODAL" });
       setNewPlaylist({ title: "", description: "dummy data" });
     }
   };

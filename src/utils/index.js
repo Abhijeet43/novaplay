@@ -7,7 +7,6 @@ export {
   getVideo,
   getCategoryVideos,
   getCategoryFilteredVideos,
-  getSearchFilteredVideos,
 } from "./videos";
 
 export {
@@ -26,6 +25,7 @@ export {
   deletePlaylist,
   isVideoInPlaylist,
   getPlaylists,
+  getPlaylist,
 } from "./playlist";
 
 export { openModal } from "./playlistModal";
@@ -44,3 +44,5 @@ export {
   removeFromHistory,
   deleteAllHistory,
 } from "./history";
+
+export { validateEmail, validatePassword, confirmPasswordCheck } from "./auth";

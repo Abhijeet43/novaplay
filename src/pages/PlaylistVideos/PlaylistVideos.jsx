@@ -1,34 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./PlaylistVidoes.css";
 import { AppDrawer, MobileNav } from "../../components";
 import { LatestVideo } from "./components/LatestVideo/LatestVideo";
 import { VideoList } from "./components/VideoList/VideoList";
 import { useNavigate, useParams } from "react-router-dom";
-import { usePlaylist } from "../../context";
+import { useAuth, useLoader } from "../../context";
+import { getPlaylist } from "../../utils/";
 
 const PlaylistVideos = () => {
   const {
-    playlistState: { playlists },
-  } = usePlaylist();
+    authState: { token },
+  } = useAuth();
+
+  const { setLoader } = useLoader();
+
+  const [playlist, setPlaylist] = useState(null);
 
   const { playlistId } = useParams();
-  const playlist = playlists.find((playlist) => playlist._id === playlistId);
-  const reversedVideos = [...playlist.videos].reverse();
+
+  let reversedVideos;
+
+  if (playlist) {
+    reversedVideos = [...playlist.videos].reverse();
+  }
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getPlaylist(token, playlistId, setPlaylist, setLoader);
+  }, [playlistId, token, setLoader]);
 
   return (
     <main className="main-section">
       <AppDrawer />
       <MobileNav />
       <section className="videos-section">
-        {playlist.videos.length > 0 ? (
+        {playlist?.videos.length > 0 ? (
           <>
             <div className="video-card-listing-container">
               <LatestVideo
                 image={reversedVideos[0].thumbnail}
                 totalLikes={reversedVideos.length}
-                updated={"2"}
                 channelName={reversedVideos[0].channelName}
                 logo={reversedVideos[0].channelLogo}
               />

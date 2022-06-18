@@ -7,15 +7,10 @@ import {
   MobileNav,
   PlaylistModal,
 } from "../../components/";
-import { useVideo, useCategory, useSearch } from "../../context/";
-import {
-  getCategoryFilteredVideos,
-  getSearchFilteredVideos,
-} from "../../utils/";
+import { useVideo, useCategory } from "../../context/";
+import { getCategoryFilteredVideos } from "../../utils/";
 
 const Explore = () => {
-  const { searchQuery, setSearchQuery } = useSearch();
-
   const {
     videoState: { videos },
   } = useVideo();
@@ -25,10 +20,6 @@ const Explore = () => {
   } = useCategory();
 
   const filteredCategoryVideos = getCategoryFilteredVideos(category, videos);
-  const filteredSearchVideos = getSearchFilteredVideos(
-    searchQuery,
-    filteredCategoryVideos
-  );
 
   return (
     <main className="main-section">
@@ -36,21 +27,9 @@ const Explore = () => {
       <MobileNav />
       <section className="videos-section">
         <div className="video-card-container">
-          <div className="nav-search">
-            <button className="search-icon">
-              <i className="fas fa-search"></i>
-            </button>
-            <input
-              type="search"
-              className="nav-search"
-              placeholder="search items here"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div>
           <PlaylistModal />
           <TopCategory />
-          {filteredSearchVideos.map((video) => {
+          {filteredCategoryVideos.map((video) => {
             return <VideoCard key={video._id} video={video} />;
           })}
         </div>

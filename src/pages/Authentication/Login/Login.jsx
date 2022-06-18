@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../authentication.css";
 import { loginService } from "../../../services/";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useLoader } from "../../../context/";
 import {
   useAuth,
   useLike,
@@ -16,6 +17,7 @@ import {
   getPlaylists,
   getHistory,
   getWatchLaterHandler,
+  validateEmail,
 } from "../../../utils/";
 
 const Login = () => {
@@ -24,13 +26,22 @@ const Login = () => {
   const { historyDispatch } = useHistory();
   const { playlistDispatch } = usePlaylist();
   const { watchLaterDispatch } = useWatchLater();
+  const { setLoader } = useLoader();
+
+  const location = useLocation();
 
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
 
+  const {
+    authState: { token },
+  } = useAuth();
+
   const [showPass, setShowPass] = useToggle(false);
+
+  const [saveUserData, setSaveUserData] = useToggle(false);
 
   const navigate = useNavigate();
 
@@ -42,6 +53,7 @@ const Login = () => {
   const guestUserHandler = (e) => {
     e.preventDefault();
     setUser(guestUser);
+    setSaveUserData(true);
   };
 
   const changeHandler = (e) => {
@@ -55,30 +67,46 @@ const Login = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const response = await loginService(user);
-      if (response.status === 200) {
-        localStorage.setItem("token", response.data.encodedToken);
-        localStorage.setItem("user", JSON.stringify(response.data.foundUser));
-        authDispatch({
-          type: "LOGIN",
-          payload: {
-            token: response.data.encodedToken,
-            user: response.data.foundUser,
-          },
-        });
-        getLikesHandler(response.data.encodedToken, likeDispatch);
-        getPlaylists(response.data.encodedToken, playlistDispatch);
-        getHistory(response.data.encodedToken, historyDispatch);
-        getWatchLaterHandler(response.data.encodedToken, watchLaterDispatch);
-        toast.success(`Welcome Back ${response.data.foundUser.firstName}`);
-        navigate("/");
-      } else {
-        throw new Error("Something Went Wrong!!... Try Again Later");
+      setLoader(true);
+      if (validateEmail(user.email)) {
+        const response = await loginService(user);
+        if (response.status === 200) {
+          if (saveUserData) {
+            localStorage.setItem("token", response.data.encodedToken);
+            localStorage.setItem(
+              "user",
+              JSON.stringify(response.data.foundUser)
+            );
+          }
+          authDispatch({
+            type: "LOGIN",
+            payload: {
+              token: response.data.encodedToken,
+              user: response.data.foundUser,
+            },
+          });
+          getLikesHandler(response.data.encodedToken, likeDispatch);
+          getPlaylists(response.data.encodedToken, playlistDispatch);
+          getHistory(response.data.encodedToken, historyDispatch);
+          getWatchLaterHandler(response.data.encodedToken, watchLaterDispatch);
+          toast.success(`Welcome Back ${response.data.foundUser.firstName}`);
+          navigate(location?.state?.from?.pathname || -1, { replace: true });
+        } else {
+          throw new Error("Something Went Wrong!!... Try Again Later");
+        }
       }
     } catch (error) {
       toast.error(error.response.data.errors[0]);
+    } finally {
+      setLoader(false);
     }
   };
+
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [token, navigate]);
 
   return (
     <main className="auth-section">
@@ -111,7 +139,11 @@ const Login = () => {
           </div>
           <div className="form-group check-remember">
             <div className="checkbox-group">
-              <input type="checkbox" id="checkbox-remember" />
+              <input
+                type="checkbox"
+                checked={saveUserData}
+                id="checkbox-remember"
+              />
               <label htmlFor="checkbox-remember">Remember Me</label>
             </div>
             <Link to="/forgotpassword" className="form-link">

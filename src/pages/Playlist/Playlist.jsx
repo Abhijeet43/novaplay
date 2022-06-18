@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Playlist.css";
 import { AppDrawer, MobileNav, PlaylistModal } from "../../components/";
 import { PlaylistCard } from "./components/PlaylistCard/PlaylistCard";
-import { usePlaylist } from "../../context";
+import { usePlaylist, useAuth } from "../../context";
 import { defaultPlaylist } from "../../assets/";
 import { useNavigate } from "react-router-dom";
+import { getPlaylists } from "../../utils";
 
 const Playlist = () => {
   const {
     playlistState: { playlists },
+    playlistDispatch,
   } = usePlaylist();
 
+  const {
+    authState: { token },
+  } = useAuth();
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getPlaylists(token, playlistDispatch);
+  }, [token, playlistDispatch]);
 
   return (
     <main className="main-section">

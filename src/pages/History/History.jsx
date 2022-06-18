@@ -41,7 +41,6 @@ const History = () => {
               <LatestVideo
                 image={reversedVideos[0].thumbnail}
                 totalLikes={reversedVideos.length}
-                updated={"2"}
                 channelName={reversedVideos[0].channelName}
                 logo={reversedVideos[0].channelLogo}
               />

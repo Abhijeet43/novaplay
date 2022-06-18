@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../authentication.css";
-import { Link } from "react-router-dom";
-import { useAuth } from "../../../context/";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth, useLoader } from "../../../context/";
 import { signUpService } from "../../../services/index";
-import { useNavigate } from "react-router-dom";
 import { useToggle } from "../../../hooks/useToggle";
 import { toast } from "react-toastify";
+import {
+  validateEmail,
+  confirmPasswordCheck,
+  validatePassword,
+} from "../../../utils";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const { authDispatch } = useAuth();
+  const {
+    authState: { token },
+    authDispatch,
+  } = useAuth();
+
+  const { setLoader } = useLoader();
 
   const [showPass, setShowPass] = useToggle(false);
   const [showConfirmPass, setShowConfirmPass] = useToggle(false);
@@ -22,6 +31,10 @@ const Signup = () => {
     confirmPassword: "",
   });
 
+  useEffect(() => {
+    if (token) navigate("/");
+  }, [token, navigate]);
+
   const changeHandler = async (e) => {
     const { name, value } = e.target;
     setUser((prevValue) => ({
@@ -33,26 +46,29 @@ const Signup = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      if (user.password !== user.confirmPassword) {
-        toast.error("Password and Confirm Password donot match");
-        return;
-      }
-      const response = await signUpService(user);
-      if (response.status === 201) {
-        authDispatch({
-          type: "SIGNUP",
-          payload: {
-            token: response.data.encodedToken,
-            user: response.data.createdUser,
-          },
-        });
-        toast.success("Signup Successful!!");
-        localStorage.setItem("token", response.data.encodedToken);
-        localStorage.setItem("user", JSON.stringify(response.data.createdUser));
-        navigate("/");
+      setLoader(true);
+      if (
+        validateEmail(user.email) &&
+        validatePassword(user.password) &&
+        confirmPasswordCheck(user.password, user.confirmPassword)
+      ) {
+        const response = await signUpService(user);
+        if (response.status === 201) {
+          authDispatch({
+            type: "SIGNUP",
+            payload: {
+              token: response.data.encodedToken,
+              user: response.data.createdUser,
+            },
+          });
+          toast.success("Signup Successful!!");
+          navigate("/");
+        }
       }
     } catch (error) {
       toast.error(error.response.data.errors[0]);
+    } finally {
+      setLoader(false);
     }
   };
 

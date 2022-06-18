@@ -2,13 +2,9 @@ import React from "react";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import { Header, Footer } from "./components/";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { RequiresAuth } from "./RequiresAuth";
 import {
   Home,
   Explore,
@@ -23,15 +19,16 @@ import {
   WatchLater,
   Error404,
 } from "./pages/";
-import { useAuth } from "./context/";
+
+import { Loader } from "./components/";
+
+import { useLoader } from "./context/";
 
 const App = () => {
-  const {
-    authState: { token, user },
-  } = useAuth();
-
+  const { loader } = useLoader();
   return (
     <>
+      {loader ? <Loader /> : null}
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -51,34 +48,44 @@ const App = () => {
         <Routes>
           <Route path="*" element={<Error404 />} />
           <Route path="/" element={<Home />} />
-          <Route
-            path="/login"
-            element={token ? <Navigate replace to="/" /> : <Login />}
-          />
-          <Route
-            path="/signup"
-            element={token ? <Navigate replace to="/" /> : <Signup />}
-          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/explore/:categoryId" element={<Explore />} />
           <Route
             path="/liked"
-            element={user ? <Liked /> : <Navigate replace to="/login" />}
+            element={
+              <RequiresAuth>
+                <Liked />
+              </RequiresAuth>
+            }
           />
           <Route path="/videoplay/:videoId" element={<VideoPlay />} />
           <Route
             path="/playlist"
-            element={token ? <Playlist /> : <Navigate replace to="/login" />}
+            element={
+              <RequiresAuth>
+                <Playlist />
+              </RequiresAuth>
+            }
           />
           <Route path="/playlist/:playlistId" element={<PlaylistVideos />} />
           <Route
             path="/history"
-            element={token ? <History /> : <Navigate replace to="/login" />}
+            element={
+              <RequiresAuth>
+                <History />
+              </RequiresAuth>
+            }
           />
           <Route path="/library" element={<Library />} />
           <Route
             path="/watchlater"
-            element={token ? <WatchLater /> : <Navigate replace to="/login" />}
+            element={
+              <RequiresAuth>
+                <WatchLater />
+              </RequiresAuth>
+            }
           />
         </Routes>
         <Footer />

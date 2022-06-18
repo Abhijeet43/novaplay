@@ -17,3 +17,5 @@ export { addToHistoryService } from "./historyServices/addToHistory.service";
 export { getHistoryService } from "./historyServices/getHistory.service";
 export { removeFromHistoryService } from "./historyServices/removeFromHistory.service";
 export { deleteAllHistoryService } from "./historyServices/deleteAllHistory.service";
+export { getSingleVideoService } from "./videoServices/getSingleVideo.service";
+export { getPlaylistService } from "./playlistServices/getPlaylist.service";

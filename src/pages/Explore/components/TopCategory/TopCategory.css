@@ -7,5 +7,6 @@
 @media (max-width: 540px) {
   .categories-container {
     overflow-x: scroll;
+    margin-top: 2rem;
   }
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./VideoInfoActions.css";
 import { useNavigate } from "react-router-dom";
 import {
@@ -7,6 +7,7 @@ import {
   openModal,
   checkWatchLaterAction,
   checkWatchLaterActionHandler,
+  getVideo,
 } from "../../../../../../../../../../utils/";
 import {
   useAuth,
@@ -20,6 +21,8 @@ const VideoInfoActions = ({ id, likes: channelLikes }) => {
   const {
     videoState: { videos },
   } = useVideo();
+
+  const [video, setVideo] = useState("");
 
   const {
     authState: { token },
@@ -37,9 +40,11 @@ const VideoInfoActions = ({ id, likes: channelLikes }) => {
     watchLaterDispatch,
   } = useWatchLater();
 
-  const video = videos.find((video) => video._id === id);
-
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getVideo(id, setVideo, navigate);
+  }, [id, navigate]);
 
   return (
     <div className="video-info-actions">
@@ -109,7 +114,6 @@ const VideoInfoActions = ({ id, likes: channelLikes }) => {
         </svg>
         Save
       </button>
-      <button className="video-action-btn">Share</button>
     </div>
   );
 };

@@ -12,7 +12,7 @@ import {
   WatchLaterProvider,
   HistoryProvider,
   CategoryProvider,
-  SearchProvider,
+  LoaderProvider,
 } from "./context/";
 
 // Call make Server
@@ -21,8 +21,8 @@ makeServer();
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
-      <CategoryProvider>
-        <SearchProvider>
+      <LoaderProvider>
+        <CategoryProvider>
           <LikeProvider>
             <PlaylistProvider>
               <PlaylistModalProvider>
@@ -36,8 +36,8 @@ ReactDOM.render(
               </PlaylistModalProvider>
             </PlaylistProvider>
           </LikeProvider>
-        </SearchProvider>
-      </CategoryProvider>
+        </CategoryProvider>
+      </LoaderProvider>
     </AuthProvider>
   </React.StrictMode>,
   document.getElementById("root")
