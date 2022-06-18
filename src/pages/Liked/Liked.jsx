@@ -41,7 +41,6 @@ const Liked = () => {
               <LatestVideo
                 image={reversedLikes[0].thumbnail}
                 totalLikes={reversedLikes.length}
-                updated={"2"}
                 channelName={reversedLikes[0].channelName}
                 logo={reversedLikes[0].channelLogo}
               />
