@@ -128,4 +128,9 @@ form {
   .section-img {
     display: none;
   }
+
+  .auth-section {
+    min-height: 100vh;
+    padding-top: 0;
+  }
 }
