@@ -40,11 +40,10 @@ const PlaylistModal = () => {
       newPlaylist.title.trim() !== "" &&
       !playlists.some((playlist) => playlist.title === newPlaylist.title)
     ) {
-      setOpenCreatePlaylist(false);
       createPlaylist({ playlist: newPlaylist }, token, playlistDispatch, video);
       setOpenCreatePlaylist(false);
+      setNewPlaylist({ title: "", description: "dummy text" });
       playlistModalDispatch({ type: "CLOSE_MODAL" });
-      setNewPlaylist({ title: "", description: "dummy data" });
     }
   };
 
@@ -56,6 +55,7 @@ const PlaylistModal = () => {
         playlistId: e.target.id,
         playlistDispatch,
       });
+      playlistModalDispatch({ type: "CLOSE_MODAL" });
     } else {
       removeFromPlaylist({
         token,
@@ -63,6 +63,7 @@ const PlaylistModal = () => {
         playlistId: e.target.id,
         playlistDispatch,
       });
+      playlistModalDispatch({ type: "CLOSE_MODAL" });
     }
   };
 
@@ -72,7 +73,10 @@ const PlaylistModal = () => {
         <header className="playlist-modal-header">
           <h3 className="playlist-modal-title">Save to</h3>
           <button
-            onClick={() => playlistModalDispatch({ type: "CLOSE_MODAL" })}
+            onClick={() => {
+              playlistModalDispatch({ type: "CLOSE_MODAL" });
+              setNewPlaylist({ title: "", description: "dummy text" });
+            }}
           >
             <i className="fas fa-times"></i>
           </button>
