@@ -66,13 +66,17 @@ const getFeaturedCategories = (categories) =>
 const getTrendingVideos = (videos) =>
   videos.filter((video) => video.isTrending);
 
-const getVideo = async (videoId, setVideoDetails, navigate, setLoader) => {
-  setLoader(true);
+const getVideo = async (videoId, setVideoDetails, navigate, setLoader = "") => {
+  if (setLoader !== "") {
+    setLoader(true);
+  }
   try {
     const response = await getSingleVideoService(videoId);
     if (response.status === 200) {
       setVideoDetails(response.data.video);
-      setLoader(false);
+      if (setLoader !== "") {
+        setLoader(false);
+      }
       return response.data.video;
     } else {
       throw new Error("Something Went Wrong.. Try Again Later");
