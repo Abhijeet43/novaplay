@@ -6,8 +6,6 @@ const likeReducer = (state, action) => {
       return { ...state, likes: action.payload };
     case "REMOVE_FROM_LIKES":
       return { ...state, likes: action.payload };
-    case "CLEAR_LIKES":
-      return { ...state, likes: [] };
     default:
       return state;
   }

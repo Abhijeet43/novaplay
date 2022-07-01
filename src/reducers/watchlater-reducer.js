@@ -6,8 +6,6 @@ const watchLaterReducer = (state, action) => {
       return { ...state, watchLater: action.payload };
     case "REMOVE_FROM_WATCHLATER":
       return { ...state, watchLater: action.payload };
-    case "CLEAR_WATCHLATER":
-      return { ...state, watchLater: [] };
     default:
       return state;
   }

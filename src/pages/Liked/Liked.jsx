@@ -30,13 +30,6 @@ const Liked = () => {
       <section className="videos-section">
         {likes.length > 0 ? (
           <>
-            <button
-              className="btn btn-danger"
-              onClick={() => likeDispatch({ type: "CLEAR_LIKES" })}
-            >
-              <i className="fa-solid fa-trash trash-icon"></i>
-              Clear Likes
-            </button>
             <div className="video-card-listing-container">
               <LatestVideo
                 image={reversedLikes[0].thumbnail}

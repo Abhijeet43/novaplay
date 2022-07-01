@@ -33,13 +33,6 @@ const WatchLater = () => {
       <section className="videos-section">
         {watchLater.length > 0 ? (
           <>
-            <button
-              className="btn btn-danger"
-              onClick={() => watchLaterDispatch({ type: "CLEAR_WATCHLATER" })}
-            >
-              <i className="fa-solid fa-trash trash-icon"></i>
-              Clear Watch Later
-            </button>
             <div className="video-card-listing-container">
               <LatestVideo
                 image={reversedVideos[0].thumbnail}
