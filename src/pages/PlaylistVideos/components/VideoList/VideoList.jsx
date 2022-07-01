@@ -2,7 +2,7 @@ import React from "react";
 import "./VideoList.css";
 import { HorizontalCard } from "../../../../components";
 
-const VideoList = ({ videos, playlistId }) => {
+const VideoList = ({ videos, playlistId, setPlaylist }) => {
   return (
     <div className="video-list">
       {videos.map((video) => {
@@ -15,6 +15,7 @@ const VideoList = ({ videos, playlistId }) => {
             miniText={true}
             miniTitle={true}
             playlistId={playlistId}
+            setPlaylist={setPlaylist}
           />
         );
       })}

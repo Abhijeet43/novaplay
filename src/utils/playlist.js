@@ -35,11 +35,12 @@ const getPlaylist = async (token, playlistId, setPlaylist, setLoader) => {
       const response = await getPlaylistService(token, playlistId);
       if (response.status === 200) {
         setPlaylist(response.data.playlist);
+        setLoader(false);
       } else {
-        throw new Error();
+        throw new Error("Something went wrong");
       }
     } catch (error) {
-      alert(error);
+      toast.error(error);
     } finally {
       setLoader(false);
     }

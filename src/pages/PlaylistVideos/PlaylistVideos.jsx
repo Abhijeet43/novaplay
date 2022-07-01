@@ -44,7 +44,11 @@ const PlaylistVideos = () => {
                 channelName={reversedVideos[0].channelName}
                 logo={reversedVideos[0].channelLogo}
               />
-              <VideoList videos={reversedVideos} playlistId={playlistId} />
+              <VideoList
+                setPlaylist={setPlaylist}
+                videos={reversedVideos}
+                playlistId={playlistId}
+              />
             </div>
           </>
         ) : (

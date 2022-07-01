@@ -11,6 +11,7 @@ import {
   checkWatchLaterActionHandler,
   removeFromWatchLater,
   removeFromHistory,
+  getPlaylist,
 } from "../../utils/";
 import {
   useAuth,
@@ -20,6 +21,7 @@ import {
   usePlayListModal,
   useWatchLater,
   useHistory,
+  useLoader,
 } from "../../context/";
 import { useToggle } from "../../hooks/useToggle";
 
@@ -30,6 +32,7 @@ const HorizontalCard = ({
   miniText = false,
   mediumCard = false,
   playlistId = false,
+  setPlaylist = "",
 }) => {
   const [showMenu, setShowMenu] = useToggle(false);
 
@@ -50,6 +53,8 @@ const HorizontalCard = ({
     watchLaterState: { watchLater },
     watchLaterDispatch,
   } = useWatchLater();
+
+  const { setLoader } = useLoader();
 
   const { historyDispatch } = useHistory();
 
@@ -89,6 +94,7 @@ const HorizontalCard = ({
           playlistId,
           playlistDispatch,
         });
+        getPlaylist(token, playlistId, setPlaylist, setLoader);
         break;
       case "/history":
         removeFromHistory(_id, token, historyDispatch);
